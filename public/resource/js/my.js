@@ -480,6 +480,14 @@ var callback_box1_open = function(data,textStatus,xhr) {
   var ep_sum = 0;
   var cur_money = Number(utils.replace($(".cur_monye").text(),',',''));
   var cur_ep = Number(utils.replace($(".cur_ep").text(),',',''));
+  var EP500 = 0;
+  var EP1000 = 0;
+  var EP3000 = 0;
+  var EP5000 = 0;
+  var EP10000 = 0;
+  var EP30000 = 0;
+  var EP50000 = 0;
+  var EP100000 = 0;
 
   my.box1_open_init();
 
@@ -492,23 +500,41 @@ var callback_box1_open = function(data,textStatus,xhr) {
     html += "</tr>";
     ep_sum += obj.value;
     money_sum += 2500;
+    if(obj.value == 500) EP500 += 1;
+    if(obj.value == 1000) EP1000 += 1;
+    if(obj.value == 3000) EP3000 += 1;
+    if(obj.value == 5000) EP5000 += 1;
+    if(obj.value == 10000) EP10000 += 1;
+    if(obj.value == 30000) EP30000 += 1;
+    if(obj.value == 50000) EP50000 += 1;
+    if(obj.value == 100000) EP100000 += 1;
 
     if(i == '0') { //마지막
       money_sum += cur_money;
       ep_sum += cur_ep;
     }
 
-    setTimeout(htmldisp,x,i,money_sum,ep_sum,html);
+    setTimeout(htmldisp,x,i,money_sum,ep_sum,html,EP500,EP1000,EP3000,EP5000,EP10000,EP30000,EP50000,EP100000);
     x += 50;
   });
 
   //고급EP개수 통계테이블추가하기.
 };
 
-var htmldisp = function(i,money_sum,ep_sum,html) {
+var htmldisp = function(i,money_sum,ep_sum,html,EP500,EP1000,EP3000,EP5000,EP10000,EP30000,EP50000,EP100000) {
+  console.log("i : " + i);
   $("#box1_result_tab tbody").append(html);
   $(".cur_money").html(utils.formatComma(String(money_sum)));
   $(".cur_ep").html(utils.formatComma(String(ep_sum)));
+
+  $(".EP500").html(EP500 +"<br/>("+(EP500/(i+1)*100).toFixed(2) +"%)");
+  $(".EP1000").html(EP1000 +"<br/>("+(EP1000/(i+1)*100).toFixed(2) +"%)");
+  $(".EP3000").html(EP3000 +"<br/>("+(EP3000/(i+1)*100).toFixed(2) +"%)");
+  $(".EP5000").html(EP5000 +"<br/>("+(EP5000/(i+1)*100).toFixed(2) +"%)");
+  $(".EP10000").html(EP10000 +"<br/>("+(EP10000/(i+1)*100).toFixed(2) +"%)");
+  $(".EP30000").html(EP30000 +"<br/>("+(EP30000/(i+1)*100).toFixed(2) +"%)");
+  $(".EP50000").html(EP50000 +"<br/>("+(EP50000/(i+1)*100).toFixed(2) +"%)");
+  $(".EP100000").html(EP100000 +"<br/>("+(EP100000/(i+1)*100).toFixed(2) +"%)");
 
   var offset = $(".cur_money").offset();
   $('html, body').animate({scrollTop : offset.top}, 0);
@@ -518,4 +544,12 @@ my.box1_open_init = function() {
   $("#box1_result_tab tbody").html("");
   $(".cur_money").html("0");
   $(".cur_ep").html("0");
+  $(".EP500").text("0");
+  $(".EP1000").text("0");
+  $(".EP3000").text("0");
+  $(".EP5000").text("0");
+  $(".EP10000").text("0");
+  $(".EP30000").text("0");
+  $(".EP50000").text("0");
+  $(".EP100000").text("0");
 };
