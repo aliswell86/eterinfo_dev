@@ -2,10 +2,11 @@
 var express = require("express");
 var utils  = require("../utils");
 var router = express.Router();
-var header_txt1 = "이터인포 - 이터널시티 - 상자뽑기시뮬레이션";
+var header_txt = "이터인포 - 이터널시티 - 알쏭달쏭 폭죽패키지";
+var header_description = "한국형 좀비 아포칼립스 RPG! 이터널시티의 알쏭달쏭 폭죽패키지를 열어 봅니다. 구성품의 확률과 결과물을 확인합니다.";
 
 router.get("/", function(req, res) {
-  res.render("boxsim/box1",{title:header_txt1,description:header_txt1});
+  res.render("boxsim/box1",{title:header_txt,description:header_description});
 });
 
 router.post("/box1open", function(req, res) {
@@ -16,14 +17,14 @@ router.post("/box1open", function(req, res) {
   var result_cur_ep = 0;
   var result_ary = [];
   var cnt = 0;
-  console.log("box1_dv : " + req.body.setep_num);
+  // console.log("box1_dv : " + req.body.setep_num);
   if(box1_dv=="300") cnt = Number(req.body.setep_num);
   else cnt = Number(box1_dv);
 
   if(Number(box1_dv) <= 300) {
     for(var i=1; i<= cnt; i++) {
       var result_box = box1_get();
-      console.log("["+i+"] result_box.value : " + result_box.value);
+      // console.log("["+i+"] result_box.value : " + result_box.value);
       result_cur_money += 2500;
       result_cur_ep += result_box.value;
       result_ary.push(result_box);
@@ -32,7 +33,7 @@ router.post("/box1open", function(req, res) {
     var j=0;
     do {
       var result_box1 = box1_get();
-      console.log("["+j+"] result_box.value : " + result_box1.value);
+      // console.log("["+j+"] result_box.value : " + result_box1.value);
       j++;
       result_cur_money += 2500;
       result_cur_ep += result_box1.value;
@@ -44,7 +45,7 @@ router.post("/box1open", function(req, res) {
   result.result_cur_ep = result_cur_ep;
   result.result_ary = result_ary;
 
-  console.log("result_ary : " + JSON.stringify(result).toString());
+  // console.log("result_ary : " + JSON.stringify(result).toString());
 
   res.json(result);
 });

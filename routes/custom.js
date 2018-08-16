@@ -6,6 +6,7 @@ var EterItem = require("../models/EterItem.js");
 var Up = require("../models/Up.js");
 var utils  = require("../utils");
 var header_txt = "이터인포 - 이터널시티 - 커스터마이징";
+var header_description = "한국형 좀비 아포칼립스 RPG! 이터널시티의 무기를 착용한것에 대한 자신의 공격력을 미리 알아보는 화면입니다. 모든 스탯과 어떤 아이템을 착용하는가에 따라 공격력이 변화합니다.";
 
 router.get("/", function(req, res) {
   res.render("custom/index",{title:header_txt,description:header_txt});

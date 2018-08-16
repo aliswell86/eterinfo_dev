@@ -5,9 +5,10 @@ var mongoose   = require("mongoose");
 var EterItem = require("../models/EterItem.js");
 var utils  = require("../utils");
 var header_txt = "이터인포 - 이터널시티 - 아이템조회";
+var header_description = "한국형 좀비 아포칼립스 RPG! 이터널시티의 무기및방어구 그리고 코스튬의 정보를 확인하는 화면입니다. 그리고 무기의 강화별 업그레이드 정보도 확인 가능합니다.";
 
 router.get("/", function(req, res) {
-  res.render("wp/index",{title:header_txt,description:header_txt});
+  res.render("wp/index",{title:header_txt,description:header_description});
 });
 
 router.post("/getitemdblist", function(req, res) {
