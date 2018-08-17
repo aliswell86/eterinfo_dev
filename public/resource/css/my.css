@@ -3,6 +3,12 @@ body {
   background-color: white;
 }
 
+caption {
+  position:absolute;
+  top:-9999px;
+  left:-9999px;
+}
+
 @media (min-width: 768px) {
   #page-wrapper {
     margin:0 0 0 0;
