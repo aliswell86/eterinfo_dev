@@ -14,7 +14,7 @@ router.get("/", function(req, res) {
 router.post("/getitemdblist", function(req, res) {
   var in_list = get_in_list(req);
 
-  EterItem.find({$and:in_list}).sort("tier").sort("order").sort("item_nm").exec(
+  EterItem.find({$and:in_list}).sort("item_nm").sort("order").sort("tier").exec(
     function(err, db_list){
       if(err) return res.json(err);
       res.json(db_list);
@@ -70,6 +70,9 @@ var get_in_list = function(req) {
       if(req.body.item_dv1==3) req.body.item_dv1=1;
       else req.body.item_dv1=2;
       in_obj4.illegal="Y";
+      in_list.push(in_obj4);
+    }else{
+      in_obj4.illegal="N";
       in_list.push(in_obj4);
     }
     in_obj1.stype1 = req.body.item_dv1;

@@ -28,7 +28,11 @@ router.post("/selectitem", function(req, res) {
         out_obj = db_list[i];
         out_obj.dmg = calcWp(db_list[i].dmg,req.body.max_dv,req.body.up_dv);
         if(req.body.clyn == "Y") {
-          out_obj.item_nm = cl_upnm[req.body.max_dv] + db_list[i].item_nm.substr(db_list[i].item_nm.indexOf("[CL]")+4);
+          if(db_list[i].item_nm.indexOf("[지원]") < 0) {
+            out_obj.item_nm = cl_upnm[req.body.max_dv] + db_list[i].item_nm.substr(db_list[i].item_nm.indexOf("[CL]")+4);
+          }else{
+            out_obj.item_nm = noncl_upnm[req.body.max_dv] + " " + db_list[i].item_nm;
+          }
         }else{
           out_obj.item_nm = noncl_upnm[req.body.max_dv] + " " + db_list[i].item_nm;
         }
@@ -84,6 +88,9 @@ var get_in_list = function(req) {
       else req.body.item_dv1=2;
 
       in_obj2.illegal="Y";
+      in_list.push(in_obj2);
+    }else{
+      in_obj2.illegal="N";
       in_list.push(in_obj2);
     }
     in_obj1.stype1 = req.body.item_dv1;
