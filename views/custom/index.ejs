@@ -18,7 +18,8 @@
             <div class="panel panel-default">
               <div class="panel-heading">
                 스펙에 따른 공격력을 확인하는 화면입니다. 장비를 선택해 주세요.<br/>
-                <b>공상이란?</b> 아이템에 의한 공격력상승의 합계입니다. 예) CL전설 24+공토이6+공목3 = 33
+                <b>1)공상이란?</b> 아이템에 의한 공격력상승의 합계입니다. 예) CL전설 24+공토이6+공목3 = 33<br/>
+                <b>2)공치란?</b> 아이템에 의한 치명상승의 합계입니다. 예) 치명악세풀20 + 치날12 = 32
               </div>
               <!-- /.panel-heading -->
               <div class="panel-body">
@@ -51,17 +52,19 @@
                             <button type="button" class="btn btn-outline btn-warning" onclick="stat_up_disp1('3')">고급</button>
                           </p>
                           <div class="stat_left">
-                            <div style="padding-top:7px;padding-bottom:7px;margin-bottom:10px;"><b>공상</b></div>
+                            <div style="padding-top:7px;padding-bottom:7px;margin-bottom:10px;"><b>1)공상</b></div>
+                            <div style="padding-top:7px;padding-bottom:7px;margin-bottom:10px;"><b>2)공치</b></div>
                             <div id="statup1_dv" style="margin-bottom:10px;">일반</div>
                             <div class="inven_tit">공</div>
                             <div class="inven_tit">치</div>
                             <div class="inven_tit">방</div>
                           </div>
                           <div class="stat_right">
-                            <input id="dmg_item_up" style="margin-bottom:10px;" class="form-control" placeholder="생명력" name="life_stat" id="life_stat" type="number" value="5">
+                            <input id="dmg_item_up" name="dmg_item_up" style="margin-bottom:10px;" class="form-control" placeholder="공상" type="number" value="5">
+                            <input id="cri_item_up" name="cri_item_up" style="margin-bottom:10px;" class="form-control" placeholder="공치" type="number" value="20">
                             <div id="statup2_dv" style="margin-bottom:10px;">없음</div>
                             <div class="inven dmg bold" id="inven_dmg"></div>
-                            <div class="inven cri bold" id="inven_cri">50</div>
+                            <div class="inven cri bold" id="inven_cri">1</div>
                             <div class="inven dfs bold" id="inven_dfs">0</div>
                           </div>
                           <p style="margin-top:180px;">
@@ -705,6 +708,15 @@
         $(this).select();
       });
 
+      $("#cri_item_up").blur(function() {
+        blur_click_event("cri_item_up");
+      });
+
+      $("#cri_item_up").click(function() {
+        blur_click_event("cri_item_up");
+        $(this).select();
+      });
+
       level_up_stat();
       my.getspecinfo();
     });
@@ -801,6 +813,9 @@
       }else if(name.indexOf("limit") > -1 || name=="dmg_item_up") {
         if(Number($("#"+name).val()) < 0) $("#"+name).val("0");
         if(Number($("#"+name).val()) > 100) $("#"+name).val(100);
+      }else if(name=="cri_item_up") {
+        if(Number($("#"+name).val()) < 0) $("#"+name).val("0");
+        if(Number($("#"+name).val()) > 50) $("#"+name).val(50);
       }else{
         var total_limit_stat = get_limit_stat();
         if(Number($("#"+name).val()) < 5) $("#"+name).val("5");

@@ -359,6 +359,8 @@ my.sel_item = function(row) {
   else if(up=="6") up_nm = "명인의";
   else if(up=="7") up_nm = "O.T.";
 
+  cri = Math.floor(Number(cri) * 1.5); //전문튜닝고정 (크리)
+
   my.popul_item_save(_id);
 
   // var item_nmZ = "";
@@ -370,6 +372,11 @@ my.sel_item = function(row) {
   //   item_nmZ = item_nm;
   // }
 
+  var item_dv1 = $("input:radio[name=item_dv1]:checked").val();
+  var cri_up_nm = "칼날";
+  if(item_dv1=="1"||item_dv1=="3") cri_up_nm = "총열";
+  else if(item_dv1=="2"||item_dv1=="4") cri_up_nm = "칼날";
+
 
   var td_html = "";
 
@@ -377,8 +384,10 @@ my.sel_item = function(row) {
   td_html += "<div style='float:right;text-align:right;'>";
   td_html += "<div style='text-align:right;height:150px;'>";
   td_html += "<div class='item_nm' style='margin-bottom:5px;'>"+item_nm+"</div> ";
-  td_html += "<span class='dmg'>파괴력:<span class='dmg_num'>"+dmg+"</span>";
+  td_html += "<span class='dmg bold'>파괴력:<span class='dmg_num'>"+dmg+"</span>";
   td_html += "<span class='up_classes"+up+"'> ("+up_nm+" 몸체)</span></span><br/>";
+  td_html += "<span class='cri bold'>치명:<span class='cri_num'>"+cri+"</span>";
+  td_html += "<span class='up_classes4'> (전문튜닝 "+cri_up_nm+")</span></span><br/>";
   // td_html += "<button type='button' class='btn btn-warning btn-circle' onclick=my.cancel_item("+ctype+")><i class='fa fa-times'></i></button>";
   td_html += "<div style='float:right;margin-top:5px;'><button type='button' class='btn btn-primary btn-sm' onclick='my.select_item_init("+ctype+")'>"+ctype_arr[Number(ctype)-1]+"선택</button></div>";
   td_html += "</div>";
@@ -451,7 +460,18 @@ my.getspecinfo = function() {
   var item_inven_dmg = (default_inven_dmg/100)*item_dmg;
   inven_dmg = Math.floor((default_inven_dmg + item_inven_dmg)*statup1*statup2*statup3);
 
+  var inven_cri = 1;
+  var wp_cri =Number($(".cri_num").text());
+  var ski_stat = Number($("#ski_stat").val());
+  var item_cri = Number($("#cri_item_up").val());
+  inven_cri = Math.floor(((wp_cri/5) * ((ski_stat/100)+1)) + item_cri + 1);
+  if(inven_cri > 50) inven_cri = 50;
+  var head_atk_rt = 0;
+  head_atk_rt = (3+(ski_stat/50)).toFixed(2);
+
+
   $("#inven_dmg").text(utils.formatComma(String(inven_dmg)));
+  $("#inven_cri").text(String(inven_cri)+"("+String(head_atk_rt)+"배)");
   // return inven_dmg;
 };
 
