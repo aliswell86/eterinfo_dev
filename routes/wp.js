@@ -14,7 +14,7 @@ router.get("/", function(req, res) {
 router.post("/getitemdblist", function(req, res) {
   var in_list = get_in_list(req);
 
-  EterItem.find({$and:in_list}).sort("order").sort("tier").exec(
+  EterItem.find({$and:in_list}).sort("tier").sort("order").sort("item_nm").exec(
     function(err, db_list){
       if(err) return res.json(err);
       res.json(db_list);
@@ -60,7 +60,9 @@ var get_in_list = function(req) {
   var in_list = [];
 
   if(req.body.item_dv==1) {
-    in_obj.clyn = req.body.clyn;
+    if(req.body.clyn.length != '0') {
+      in_obj.clyn = req.body.clyn;
+    }
     in_obj.ctype = req.body.item_dv;
     in_list.push(in_obj);
 
@@ -73,7 +75,9 @@ var get_in_list = function(req) {
     in_obj1.stype1 = req.body.item_dv1;
     in_list.push(in_obj1);
   }else if(req.body.item_dv==2) {
-    in_obj.clyn = req.body.clyn;
+    if(req.body.clyn.length != '0') {
+      in_obj.clyn = req.body.clyn;
+    }
     in_obj.ctype = req.body.item_dv;
     in_list.push(in_obj);
 
@@ -84,7 +88,9 @@ var get_in_list = function(req) {
     in_obj2.stype2 = req.body.item_dv3;
     in_list.push(in_obj2);
   }else if(req.body.item_dv==3 || req.body.item_dv==4) {
-    in_obj.clyn = req.body.clyn;
+    if(req.body.clyn.length != '0') {
+      in_obj.clyn = req.body.clyn;
+    }
     in_obj.ctype = req.body.item_dv;
     in_list.push(in_obj);
 

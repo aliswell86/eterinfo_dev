@@ -73,7 +73,9 @@ var get_in_list = function(req) {
   var in_list = [];
 
   if(req.body.ctype == "1") {
-    in_obj.clyn = req.body.clyn;
+    if(req.body.clyn.length != '0') {
+      in_obj.clyn = req.body.clyn;
+    }
     in_obj.ctype = req.body.ctype;
     in_list.push(in_obj);
     if(req.body.item_dv1==3 || req.body.item_dv1==4) {
