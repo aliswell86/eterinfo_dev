@@ -4,870 +4,331 @@
   <% include ../partials/head %>
 </head>
 <body>
-  <div id="wrapper">
-    <% include ../partials/nav %>
-    <div id="page-wrapper">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-12">
-            <h1 class="page-header">커스터마이징</h1>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                스펙에 따른 공격력을 확인하는 화면입니다. 장비를 선택해 주세요.<br/>
-                <b>1)공상이란?</b> 아이템에 의한 공격력상승의 합계입니다. 예) CL전설 24+공토이6+공목3 = 33<br/>
-                <b>2)공치란?</b> 아이템에 의한 치명상승의 합계입니다. 예) 치명악세풀20 + 치날12 = 32
-              </div>
-              <!-- /.panel-heading -->
-              <div class="panel-body" style="padding:0px;">
-                <form role="form" id="custom_form" name="custom_form">
-                  <!-- <button type="button" class="btn btn-primary btn-lg btn-block" style="margin-bottom:10px;" onclick="my.get_spec_info();">결과보기</button> -->
-                  <input type="hidden" id="point_hid" name="point_hid" value="0" />
-                  <table class="table table-bordered">
-                    <caption>커스터마이징을 위한 무기선택및 케릭터의 능력치를 입력합니다.</caption>
-                    <colgroup>
-                      <col style="width:50%"/>
-                      <col style="width:50%"/>
-                    </colgroup>
-                    <tbody>
-                      <tr>
-                        <td class="ctype1_sel stat_info" colspan="2">
-                          <div style="text-align:right;height:150px;">
-                            <div class="form-group">
-                              <button type="button" class="btn btn-primary btn-sm" onclick="my.select_item_init('1')">무기선택</button>
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="stat_info" rowspan="2">
-                          <p>
-                            <button type="button" class="btn btn-outline btn-danger" onclick="stat_up_disp('1')">일반</button>
-                            <button type="button" class="btn btn-outline btn-danger" onclick="stat_up_disp('2')">변이</button>
-                            <br/>
-                            <button type="button" class="btn btn-outline btn-warning" onclick="stat_up_disp1('1')">없음</button>
-                            <button type="button" class="btn btn-outline btn-warning" onclick="stat_up_disp1('2')">공앰</button>
-                            <button type="button" class="btn btn-outline btn-warning" onclick="stat_up_disp1('3')">고급</button>
-                          </p>
-                          <div class="stat_left">
-                            <div style="padding-top:7px;padding-bottom:7px;margin-bottom:10px;"><b>1)공상</b></div>
-                            <div style="padding-top:7px;padding-bottom:7px;margin-bottom:10px;"><b>2)공치</b></div>
-                            <div id="statup1_dv" style="margin-bottom:10px;" class="bold">일반</div>
-                            <div class="inven_tit">공</div>
-                            <div class="inven_tit">치</div>
-                            <div class="inven_tit">방</div>
-                            <div class="inven_tit">해방<br/>공</div>
-                          </div>
-                          <div class="stat_right">
-                            <input id="dmg_item_up" name="dmg_item_up" style="margin-bottom:10px;" class="form-control" placeholder="공상" type="number" value="5">
-                            <input id="cri_item_up" name="cri_item_up" style="margin-bottom:10px;" class="form-control" placeholder="공치" type="number" value="20">
-                            <div id="statup2_dv" style="margin-bottom:10px;" class="bold">없음</div>
-                            <div class="inven dmg bold" id="inven_dmg"></div>
-                            <div class="inven cri bold" id="inven_cri">1</div>
-                            <div class="inven dfs bold" id="inven_dfs">0</div>
-                            <div class="form-group" style="margin-top:6px;">
-                              <input class="form-control" placeholder="공격" name="limit_dmg" id="limit_dmg" type="number" value="0">
-                            </div>
-                          </div>
-                          <p style="margin-top:270px;">
-                            <button type="button" class="btn btn-success" onclick="my.get_spec_info();">세팅적용</button>
-                            <div class="panel-group" id="accordion">
-                              <div class="panel panel-default">
-                                <div class="panel-heading">
-                                  <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">타격시뮬레이션</a>
-                                  </h4>
-                                </div>
-                                <div id="collapseOne" class="panel-collapse collapse">
-                                  <div class="panel-body">
-                                    준비중 입니다.
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </p>
-                        </td>
-                        <td class='stat_info' rowspan="2">
-                          <div class="form-group scrollbar height580">
-                            <form role="form" name="stat_form" id="stat_form">
-                              <fieldset>
-                                <div class="stat_left">
-                                  <div class="stat_left_tit">환생</div>
-                                  <div class="stat_left_tit">레벨</div>
-                                  <div class="stat_left_tit2">환생<br/>Point</div>
-                                  <div class="stat_left_tit2">렙업<br/>Point</div>
-                                  <div class="stat_left_tit2">Total<br/>Point</div>
-                                  <div class="stat_left_tit">생명</div>
-                                  <div class="stat_left_tit">체력</div>
-                                  <div class="stat_left_tit">지구</div>
-                                  <div class="stat_left_tit">기술</div>
-                                  <div class="stat_left_tit">지능</div>
-                                  <div class="stat_left_tit">속도</div>
-                                  <!-- <div class="stat_left_tit2">해방<br/>공</div>
-                                  <div class="stat_left_tit2">해방<br/>방</div>
-                                  <div class="stat_left_tit2">해방<br/>체</div> -->
-                                </div>
-                                <div class="stat_right">
-                                  <div class="form-group">
-                                    <select class="form-control" name="restat" id="restat">
-                                        <option value="0">노환</option>
-                                        <option value="1">1환</option>
-                                        <option value="2">2환</option>
-                                        <option value="3">3환</option>
-                                        <option value="4">4환</option>
-                                        <option value="5">5환</option>
-                                    </select>
-                                  </div>
-                                  <div class="form-group">
-                                    <input class="form-control" placeholder="레벨" name="level" id="level" type="number" value="1" maxlength="3">
-                                  </div>
-                                  <div class="form-group">
-                                    <input class="form-control" placeholder="환생포인트" name="restat_hid" id="restat_hid" type="number" value="0" disabled>
-                                  </div>
-                                  <div class="form-group">
-                                    <input class="form-control" placeholder="렙업포인트" name="levelstat_hid" id="levelstat_hid" type="number" value="0" disabled>
-                                  </div>
-                                  <div class="form-group">
-                                    <input class="form-control" placeholder="포인트" name="point_stat" id="point_stat" type="number" value="0" disabled>
-                                  </div>
-                                  <div class="form-group">
-                                    <input class="form-control" placeholder="생명력" name="life_stat" id="life_stat" type="number" value="5">
-                                  </div>
-                                  <div class="form-group">
-                                    <input class="form-control" placeholder="체력" name="con_stat" id="con_stat" type="number" value="5">
-                                  </div>
-                                  <div class="form-group">
-                                    <input class="form-control" placeholder="지구" name="dfs_stat" id="dfs_stat" type="number" value="5">
-                                  </div>
-                                  <div class="form-group">
-                                    <input class="form-control" placeholder="기술" name="ski_stat" id="ski_stat" type="number" value="5">
-                                  </div>
-                                  <div class="form-group">
-                                    <input class="form-control" placeholder="지능" name="int_stat" id="int_stat" type="number" value="5">
-                                  </div>
-                                  <div class="form-group">
-                                    <input class="form-control" placeholder="속도" name="spd_stat" id="spd_stat" type="number" value="5">
-                                  </div>
-                                  <!-- <div class="form-group">
-                                    <input class="form-control" placeholder="공격" name="limit_dmg" id="limit_dmg" type="number" value="0">
-                                  </div>
-                                  <div class="form-group">
-                                    <input class="form-control" placeholder="방어" name="limit_dfs" id="limit_dfs" type="number" value="0">
-                                  </div>
-                                  <div class="form-group">
-                                    <input class="form-control" placeholder="체력" name="limit_con" id="limit_con" type="number" value="0">
-                                  </div> -->
-                                </div>
-                                <!-- Change this to a button or input when using this as a form -->
-                              </fieldset>
-                            </form>
-                          <div>
-                          <!-- <a href="index.html" class="btn btn-lg btn-success btn-block">정보입력</a> -->
-                        </td>
-                      </tr>
-                      <!-- <tr>
-                        <td>
-                          <button type="button" class="btn btn-primary btn-sm" onclick="my.select_item_init('1')">상의</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <button type="button" class="btn btn-primary btn-sm" onclick="my.select_item_init('2')">하의</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <button type="button" class="btn btn-primary btn-sm" onclick="my.select_item_init('2')">코트</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <button type="button" class="btn btn-primary btn-sm" onclick="my.select_item_init('2')">모자</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <button type="button" class="btn btn-primary btn-sm" onclick="my.select_item_init('2')">신발</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <button type="button" class="btn btn-primary btn-sm" onclick="my.select_item_init('2')">가발</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <button type="button" class="btn btn-primary btn-sm" onclick="my.select_item_init('2')">스타킹</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <button type="button" class="btn btn-primary btn-sm" onclick="my.select_item_init('2')">전신의상</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <button type="button" class="btn btn-primary btn-sm" onclick="my.select_item_init('2')">코스튬</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <button type="button" class="btn btn-primary btn-sm" onclick="my.select_item_init('2')">날개</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <button type="button" class="btn btn-primary btn-sm" onclick="my.select_item_init('2')">토이</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <button type="button" class="btn btn-primary btn-sm" onclick="my.select_item_init('2')">벨트</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <button type="button" class="btn btn-primary btn-sm" onclick="my.select_item_init('2')">귀걸이</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <button type="button" class="btn btn-primary btn-sm" onclick="my.select_item_init('2')">목걸이</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <button type="button" class="btn btn-primary btn-sm" onclick="my.select_item_init('2')">팔찌</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <button type="button" class="btn btn-primary btn-sm" onclick="my.select_item_init('2')">반지</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <button type="button" class="btn btn-primary btn-sm" onclick="my.select_item_init('2')">왼반</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <button type="button" class="btn btn-primary btn-sm" onclick="my.select_item_init('2')">환생악세</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <button type="button" class="btn btn-primary btn-sm" onclick="my.select_item_init('2')">타로</button>
-                        </td>
-                      </tr> -->
-                    </tbody>
-                  </table>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
+  <% include ../partials/nav %>
+  <!-- Page Content -->
+  <div class="container">
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3"><a href="/custom">커스터마이징</a>
+      <small><a href="/custom">공격력</a></small>
+    </h1>
 
-        <!-- Modal -->
-       <div class="modal fade" id="selModal" tabindex="-1" role="dialog" aria-labelledby="selModalLabel" aria-hidden="true">
-         <div class="modal-dialog">
-           <div class="modal-content">
-             <div class="modal-header">
-               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-               <h4 class="modal-title" id="selModalLabel"></h4>
-             </div>
-             <div class="modal-body">
-               <div class="row">
-                 <div class="col-lg-12">
-                   <form role="form" id="list_form" name="list_form">
-                     <div class="table-responsive table-bordered">
-                       <table class="table src_bx">
-                         <caption>선택할 무기를 조회하고 업그레이드 강화 수치를 정합니다.</caption>
-                         <colgroup>
-                           <col style="width:10%"/>
-                           <col style="width:20%"/>
-                           <col style="width:20%"/>
-                           <col style="width:*"/>
-                           <col style="width:20%"/>
-                         </colgroup>
-                         <thead>
-                         </thead>
-                         <tbody>
-                           <tr>
-                             <td>
-                               <div class="form-group scrollbar">
-                                 <div class="radio">
-                                   <label>
-                                     <input type="radio" name="clyn" id="clyn0" value="">전체
-                                   </label>
-                                 </div>
-                                 <div class="radio">
-                                   <label>
-                                     <input type="radio" name="clyn" id="clyn1" value="Y" checked>Classic
-                                   </label>
-                                 </div>
-                                 <div class="radio">
-                                   <label>
-                                     <input type="radio" name="clyn" id="clyn2" value="N">일반
-                                   </label>
-                                 </div>
-                               </div>
-                             </div>
-                             </td>
-                             <td>
-                               <div class="form-group scrollbar">
-                                 <div class="radio">
-                                   <label>
-                                     <input type="radio" name="item_dv1" id="stype12" value="2" checked>근거리
-                                   </label>
-                                 </div>
-                                 <div class="radio">
-                                   <label>
-                                     <input type="radio" name="item_dv1" id="stype11" value="1">원거리
-                                   </label>
-                                 </div>
-                                 <div class="radio">
-                                   <label>
-                                     <input type="radio" name="item_dv1" id="stype12" value="4">근거리<br/>(불법무기)
-                                   </label>
-                                 </div>
-                                 <div class="radio">
-                                   <label>
-                                     <input type="radio" name="item_dv1" id="stype11" value="3">원거리<br/>(불법무기)
-                                   </label>
-                                 </div>
-                               </div>
-                             </td>
-                             <td>
-                               <div class="form-group scrollbar">
-                                 <div class="radio">
-                                   <label>
-                                     <input type="radio" name="up_dv" id="up_dv1" value="1" checked>기본
-                                   </label>
-                                 </div>
-                                 <div class="radio">
-                                   <label>
-                                     <input type="radio" name="up_dv" id="up_dv2" value="2">초보
-                                   </label>
-                                 </div>
-                                 <div class="radio">
-                                   <label>
-                                     <input type="radio" name="up_dv" id="up_dv3" value="3">숙련
-                                   </label>
-                                 </div>
-                                 <div class="radio">
-                                   <label>
-                                     <input type="radio" name="up_dv" id="up_dv4" value="4">전문
-                                   </label>
-                                 </div>
-                                 <div class="radio">
-                                   <label>
-                                     <input type="radio" name="up_dv" id="up_dv5" value="5">장인
-                                   </label>
-                                 </div>
-                                 <div class="radio">
-                                   <label>
-                                     <input type="radio" name="up_dv" id="up_dv6" value="6">명인
-                                   </label>
-                                 </div>
-                                 <div class="radio">
-                                   <label>
-                                     <input type="radio" name="up_dv" id="up_dv7" value="7">OT
-                                   </label>
-                                 </div>
-                               </div>
-                             </td>
-                             <td>
-                               <div class="form-group scrollbar" id="max_dv_view">
-                               </div>
-                             </td>
-                             <td>
-                               <div class="form-group scrollbar" id="tier_dv_view">
-                               </div>
-                             </td>
-                           </tr>
-                         </tbody>
-                       </table>
-                     </div>
-                   </form>
-                   <div style="margin-top:15px;"></div>
-                   <div class="table-responsive table-bordered">
-                     <table width="100%" class="table my-list" id="sel_list_table">
-                       <caption>선택한 조건에 해당되는 무기 리스트를 조회합니다.</caption>
-                       <colgroup>
-                         <col style="width:*" />
-                         <col style="width:10%" />
-                         <col style="width:10%" />
-                         <col style="width:10%" />
-                         <col style="width:10%" />
-                       </colgroup>
-                       <thead>
-                         <tr>
-                           <th>이름</th>
-                           <th>공격</th>
-                           <th>치명</th>
-                           <th>방어</th>
-                           <th>체력</th>
-                         </tr>
-                       </thead>
-                       <tbody>
-                       </tbody>
-                     </table>
-                   </div>
-                 </div>
-               </div>
-             </div>
-             <div class="modal-footer">
-               <!-- <button type="button" class="btn btn-primary">장비착용</button> -->
-               <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-             </div>
-            </div>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="/">Home</a>
+      </li>
+      <li class="breadcrumb-item"><a href="/custom">커스터마이징</a></li>
+      <li class="breadcrumb-item active">공격력</li>
+      <li class="breadcrumb-item"><span class="dmg" id="btit"></span> <span class="cri" id="dptit"></span></li>
+    </ol>
+
+    <p>
+      <h2 class="dmg">인벤공격력 - <span id="curr_inv_dmg">1</span> (<span id="cur_byn">휴먼</span>,<span id="cur_dpdv">노공앰</span>)</h2>
+    </p>
+
+    <div class="row">
+      <div class="col-lg-2 col-md-4 col-sm-6 portfolio-item">
+        <div class="card h-100">
+          <% if(data.yn=="N") { %>
+          <a href="#"><img class="card-img-top" src="" alt=""></a>
+          <% }else{ %>
+          <a href="#"><img class="card-img-top" src="<%=data.item_info.img_src %>" alt=""></a>
+          <% } %>
+          <div class="card-body">
+            <h4 class="card-title">
+              <% if(data.yn=="N") { %>
+              <a href="/wp">무기를 선택해주세요.</a>
+              <% }else{ %>
+              <span id="curr_wp_nm"><%=data.item_info.item_nm %></span><br/>
+              <a href="javascript:wp_change();">[무기변경]</a>
+              <% } %>
+            </h4>
+            <p class="card-text">
+              <% if(data.yn=="N") { %>
+              <% }else{ %>
+              <div class=''>종류:<%=data.item_info.item_dtl_dv %></div>
+              <div class='dmg'>파괴력:<span id="curr_wp_dmg"><%=data.item_info.dmg %></span></div>
+              <div class='cri'>치명타:<%=data.item_info.cri %></div>
+              <div class='accuracy'>명중률:<%=String(Math.floor(Number(data.item_info.accuracy_rate)*100)) %>%</div>
+              <div class='point'>탄착률:<%=String(Math.floor(Number(data.item_info.point_rate)*100)) %>%</div>
+              <div class='speed'>속도:<%=data.item_info.speed %>회/1분</div>
+              <div class=''>등급:<%=data.item_info.tier %></div>
+              <div class=''>크기:<%=data.item_info.size %></div>
+              <div style="margin-top:10px;"></div>
+              <div class="up_classes1" id="curr_wp_body_nm">일반튜닝 몸체</div>
+              <% } %>
+            </p>
           </div>
         </div>
-        <div class="modal fade" id="statModal" tabindex="-1" role="dialog" aria-labelledby="statModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="statModalLabel">환생정보를 입력해주세요.</h4>
+      </div>
+      <div class="col-lg-2 mb-4">
+        <div class="card h-100">
+          <h4 class="card-header">몸체</h4>
+          <div class="card-body">
+            <p class="card-text">
+              <div class="btn_group" id="body_up">
+                <button class="btn up1" type="button" value="0">일반</button>
+                <button class="btn up2" type="button" value="1">초보</button>
+                <button class="btn up3" type="button" value="2">숙련</button>
+                <button class="btn up4" type="button" value="3">전문</button>
+                <button class="btn up5" type="button" value="4">장인</button>
+                <button class="btn up6" type="button" value="5">명인</button>
+                <button class="btn up7" type="button" value="6">O.T.</button>
               </div>
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col-lg-12" id="restat_view">
-
-                  </div>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 mb-4">
+        <div class="card h-100">
+          <h4 class="card-header">강화</h4>
+          <div class="card-body">
+            <p class="card-text">
+              <div class="btn_group" id="num_up">
+                <button class="btn nor_up" type="button" value="0">노강</button>
+                <button class="btn nor_up" type="button" value="1">1강</button>
+                <button class="btn nor_up" type="button" value="2">2강</button>
+                <button class="btn nor_up" type="button" value="3">3강</button>
+                <button class="btn nor_up" type="button" value="4">4강</button>
+                <button class="btn nor_up" type="button" value="5">5강</button>
+                <button class="btn nor_up" type="button" value="6">6강</button>
+                <button class="btn nor_up" type="button" value="7">7강</button>
+                <button class="btn nor_up" type="button" value="8">8강</button>
+                <button class="btn nor_up" type="button" value="9">9강</button>
+                <button class="btn max_up" type="button" value="10">맥강</button>
+                <button class="btn max_up" type="button" value="11">맥1강</button>
+                <button class="btn max_up" type="button" value="12">맥2강</button>
+                <button class="btn max_up" type="button" value="13">맥3강</button>
+                <button class="btn max_up" type="button" value="14">맥4강</button>
+                <button class="btn max_up" type="button" value="15">맥5강</button>
+                <button class="btn max_up" type="button" value="16">맥6강</button>
+                <button class="btn max_up" type="button" value="17">맥7강</button>
+                <button class="btn max_up" type="button" value="18">맥8강</button>
+                <button class="btn max_up" type="button" value="19">맥9강</button>
+              </div>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 mb-4">
+        <div class="card h-100">
+          <% if(data.yn=="N") { %>
+          <h4 class="card-header">현재스탯<!-- (<span id="cur_stat_nm1">체력/기술</span>:<span class="bold">5</span>)--></h4>
+          <% }else{ %>
+          <h4 class="card-header">현재스탯<!-- (<span id="cur_stat_nm1"><%=data != null && data.item_info.stype1=="1" ? "기술" : "체력" %></span>:<span class="bold">5</span>)--></h4>
+          <% } %>
+          <div class="card-body">
+            <p class="card-text">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <% if(data.yn=="N") { %>
+                    <button class="btn btn-secondary" type="button"><span>체력/기술</span></button>
+                  <% }else{ %>
+                  <button class="btn btn-secondary" type="button"><span><%=data.item_info.stype1=="1" ? "기술" : "체력" %></span></button>
+                  <% } %>
+                </span>
+                <input type="number" class="form-control" placeholder="" value="5" id="stat" />
+              </div>
+              <div style="margin:5px;"></div>
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <button class="btn btn-secondary" type="button">해방 (공격력)</button>
+                </span>
+                <input type="number" class="form-control" placeholder="" value="0" id="rimitDmg" />
+              </div>
+              <div style="margin:5px;"></div>
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <button class="btn btn-secondary" type="button">템상공</button>
+                </span>
+                <input type="number" class="form-control" placeholder="" value="0" id="itemUpDmg" />
+                <!-- <span class="input-group-btn">
+                  <button class="btn btn-secondary" type="button">자동등록</button>
+                </span> -->
+              </div>
+              <div style="margin:5px;"></div>
+              <button class="btn btn-primary" type="button" onclick="javascript:getIvDmg();">스탯적용</button>
+              <button class="btn btn-primary" type="button">스탯초기화</button>
+              <p style="margin-top:5px;">
+                * 템상공이란? 무기를 제외한 아이템에 붙어있는 공격력 옵션의 합을 뜻합니다. (발공토이(6) + 영웅옷(28) + 최악풀셋(6) = 40)
+              </p>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2 mb-4">
+        <div class="card h-100">
+          <h4 class="card-header">변이/공앰</h4>
+          <div class="card-body">
+            <p class="card-text">
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle btn-danger" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  #변이상태
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="bynCtt">
+                  <a class="dropdown-item" value="0">휴먼</a>
+                  <a class="dropdown-item" value="3">변이</a>
                 </div>
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="restat_confirm">확인</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+              <div style="margin:5px;"></div>
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle btn-warning" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  #공앰상태
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="dpdvCtt">
+                  <a class="dropdown-item" value="0">공앰없음</a>
+                  <a class="dropdown-item" value="2">일반공앰</a>
+                  <a class="dropdown-item" value="3">고급공앰</a>
+                </div>
               </div>
-            </div>
+              <input type="hidden" id="bYn" value="0" />
+              <input type="hidden" id="dpDv" value="0" />
+            </p>
           </div>
         </div>
       </div>
     </div>
+
+    <p>
+      <h2 class="dmg">인벤공격력 - <span id="curr_inv_dmg1">1</span></h2>
+    </p>
+
   </div>
+  <% include ../partials/footer %>
   <% include ../partials/script %>
   <script>
     jQuery(document).ready(function() {
-      var max_dv_html = "";
-      var tier_dv_html = "";
-      var upnm = "노강";
-      var clyn = $("input:radio[name=clyn]:checked").val();
-      var checked = "";
-      for(var i=0; i<20; i++) {
-        if(i==0) checked = "checked";
-        else checked = "";
+      var curr_body_up = "0";
+      var curr_num_up = "0";
 
-        if(i>0&&i<10) {
-          if(clyn=='Y') upnm = "[CL] +"+i;
-          else upnm = "+"+i;
-        }else if(i==10) {
-          if(clyn=='Y') upnm = "[CL-MAX]";
-          else upnm = "[MAX]";
-        }else if(i>10){
-          if(clyn=='Y') upnm = "[CL-MAX] +"+(i-10);
-          else upnm = "[MAX] +"+(i-10);
-        }
+      getIvDmg();
 
-        max_dv_html += "<div class='radio'><label><input type='radio' name='max_dv' id='max_dv"+i+"' value='"+i+"' "+checked+">"+upnm+"</label></div>";
-      }
-      $("#max_dv_view").html(max_dv_html);
+      $("button.btn").click(function() {
+        if("<%=data.yn %>" == "N") return;
 
-      tier_dv_html = "<div class='radio'><label><input type='radio' name='item_dv4' id='item_dv40' value='' checked>전체</label></div>";
-      for(var i=1; i<13; i++) {
-        tier_dv_html += "<div class='radio'><label><input type='radio' name='item_dv4' id='item_dv4"+i+"' value='"+i+"'>"+i+" 등급</label></div>";
-      }
-      $("#tier_dv_view").html(tier_dv_html);
-
-      $("input:radio[name=clyn]").click(function() {
-        my.select_item("1");
-      });
-      $("input:radio[name=item_dv1]").click(function() {
-        my.select_item("1");
-      });
-      $("input:radio[name=up_dv]").click(function() {
-        my.select_item("1");
-      });
-      $("input:radio[name=max_dv]").click(function() {
-        my.select_item("1");
-      });
-      $("input:radio[name=item_dv4]").click(function() {
-        my.select_item("1");
-      });
-
-      $("#restat").change(function() {
-        var cnt = Number($("#restat").val());
-        var html = "";
-        if(cnt > 0) {
-          for(var i=0; i<cnt; i++) {
-            html += "<div style='float:left;width:8%;height:34px;margin-bottom:5px;text-align:center;vertical-align:middle;'>"+(i+1)+"환</div>";
-            html += "<div style='float:right;width:90%;margin-bottom:5px;'>";
-            html += "<select class='form-control' id='restat_dv"+(i+1)+"'>";
-            html += "<option value='1'>105 ~</option>";
-            html += "<option value='2'>108 ~</option>";
-            html += "<option value='3'>111 ~</option>";
-            html += "<option value='4'>114 ~</option>";
-            html += "<option value='5'>117 ~</option>";
-            html += "<option value='6'>120 ~</option>";
-            html += "<option value='7'>123 ~</option>";
-            html += "<option value='8'>126 ~</option>";
-            html += "</select>";
-            html += "</div>";
+        var curr_wp_dmg = "0";
+        var curr_wp_numnm = "";
+        var curr_wp_nm = "<%=data.item_info.item_nm %>";
+        var curr_id = $(this).parents("div").attr("id");
+        if(curr_id=="body_up"||curr_id=="num_up") {
+          if(curr_id=="body_up") {
+            curr_body_up = $(this).attr("value");
           }
-          $("#restat_view").html(html);
-          $('#statModal').modal('show');
-        }
-      });
-
-      $("#restat_confirm").click(function() {
-        var cnt = Number($("#restat").val());
-        var html = "";
-        var plus_stat = 0;
-
-        if(cnt > 0) {
-          for(var i=0; i<cnt; i++) {
-            var restat_dv = $("#restat_dv"+(i+1)).val();
-            if(restat_dv=="1") plus_stat += 5;
-            else if(restat_dv=="2") plus_stat += 7;
-            else if(restat_dv=="3") plus_stat += 9;
-            else if(restat_dv=="4") plus_stat += 11;
-            else if(restat_dv=="5") plus_stat += 13;
-            else if(restat_dv=="6") plus_stat += 15;
-            else if(restat_dv=="7") plus_stat += 17;
-            else if(restat_dv=="8") plus_stat += 19;
+          if(curr_id=="num_up") {
+            curr_num_up = $(this).attr("value");
           }
+
+          var up_body_ary = [];
+          if(curr_body_up == "0") {
+            up_body_ary = "<%=data.up_obj.up_cls1 %>";
+            $("#curr_wp_body_nm").text("일반튜닝 몸체");
+            $("#curr_wp_body_nm").attr("class", "up_classes1");
+          }else if(curr_body_up == "1") {
+            up_body_ary = "<%=data.up_obj.up_cls2 %>";
+            $("#curr_wp_body_nm").text("초보튜닝 몸체");
+            $("#curr_wp_body_nm").attr("class", "up_classes2");
+          }else if(curr_body_up == "2") {
+            up_body_ary = "<%=data.up_obj.up_cls3 %>";
+            $("#curr_wp_body_nm").text("숙련튜닝 몸체");
+            $("#curr_wp_body_nm").attr("class", "up_classes3");
+          }else if(curr_body_up == "3") {
+            up_body_ary = "<%=data.up_obj.up_cls4 %>";
+            $("#curr_wp_body_nm").text("전문튜닝 몸체");
+            $("#curr_wp_body_nm").attr("class", "up_classes4");
+          }else if(curr_body_up == "4") {
+            up_body_ary = "<%=data.up_obj.up_cls5 %>";
+            $("#curr_wp_body_nm").text("장인의 몸체");
+            $("#curr_wp_body_nm").attr("class", "up_classes5");
+          }else if(curr_body_up == "5") {
+            up_body_ary = "<%=data.up_obj.up_cls6 %>";
+            $("#curr_wp_body_nm").text("명인의 몸체");
+            $("#curr_wp_body_nm").attr("class", "up_classes6");
+          }else if(curr_body_up == "6") {
+            up_body_ary = "<%=data.up_obj.up_cls7 %>";
+            $("#curr_wp_body_nm").text("O.T. 몸체");
+            $("#curr_wp_body_nm").attr("class", "up_classes7");
+          }
+
+          curr_wp_dmg = up_body_ary.split(",")[Number(curr_num_up)];
+
+          var upnm_ary = [];
+          if("<%=data.item_info.clyn %>" == "Y") upnm_ary = "<%=data.numup_list_cl %>";
+          else upnm_ary = "<%=data.numup_list %>";
+
+          curr_wp_numnm = upnm_ary.split(",")[Number(curr_num_up)];
+
+          //데미지세팅
+          $("#curr_wp_dmg").text(curr_wp_dmg);
+
+          //아이템이름세팅
+          if(curr_wp_nm.indexOf("[CL]") > 0) {
+            $("#curr_wp_nm").text(curr_wp_numnm + curr_wp_nm.substr(curr_wp_nm.indexOf("[CL]")+4));
+          }else{
+            $("#curr_wp_nm").text(curr_wp_numnm + " " + curr_wp_nm);
+          }
+
+          getIvDmg();
         }
-
-        $("#restat_hid").val(plus_stat);
-        var levelstat_hid = Number($("#levelstat_hid").val());
-        var restat_stat = Number($("#restat_hid").val());
-        $("#point_hid").val(String(restat_stat + levelstat_hid));
-        $("#point_stat").val($("#point_hid").val());
-        $('#statModal').modal('hide');
       });
 
-      $("#level").blur(function() {
-        blur_click_event("level");
+      $(".dropdown-item").click(function() {
+        var curr_id = $(this).parents("div").attr("id");
+        var bYn = 1;
+        var dpDv = 1;
+
+        if(curr_id=="bynCtt" || curr_id=="dpdvCtt") {
+          if(curr_id=="bynCtt") {
+            $("#bYn").val($(this).attr("value"));
+            $("#cur_byn").text($(this).text());
+          }
+
+          if(curr_id=="dpdvCtt") {
+            $("#dpDv").val($(this).attr("value"));
+            $("#cur_dpdv").text($(this).text());
+          }
+
+          getIvDmg();
+        }
       });
 
-      $("#level").click(function() {
-        $(this).select();
-        blur_click_event("level");
-      });
-
-      $("#level").keyup(function() {
-        level_up_stat();
-      });
-
-      $("#level").mouseup(function() {
-        $(this).select();
-        level_up_stat();
-      });
-
-      $("#life_stat").blur(function() {
-        blur_click_event("life_stat");
-      });
-
-      $("#life_stat").click(function() {
-        blur_click_event("life_stat");
-        $(this).select();
-      });
-
-      $("#con_stat").blur(function() {
-        blur_click_event("con_stat");
-      });
-
-      $("#con_stat").click(function() {
-        blur_click_event("con_stat");
-        $(this).select();
-      });
-
-      $("#dfs_stat").blur(function() {
-        blur_click_event("dfs_stat");
-      });
-
-      $("#dfs_stat").click(function() {
-        blur_click_event("dfs_stat");
-        $(this).select();
-      });
-
-      $("#ski_stat").blur(function() {
-        blur_click_event("ski_stat");
-      });
-
-      $("#ski_stat").click(function() {
-        blur_click_event("ski_stat");
-        $(this).select();
-      });
-
-      $("#int_stat").blur(function() {
-        blur_click_event("int_stat");
-      });
-
-      $("#int_stat").click(function() {
-        blur_click_event("int_stat");
-        $(this).select();
-      });
-
-      $("#spd_stat").blur(function() {
-        blur_click_event("spd_stat");
-      });
-
-      $("#spd_stat").click(function() {
-        blur_click_event("spd_stat");
-        $(this).select();
-      });
-
-      $("#life_stat").keyup(function() {
-        set_stat("life_stat");
-      });
-
-      $("#life_stat").mouseup(function() {
-        $(this).select();
-        set_stat("life_stat");
-      });
-
-      $("#con_stat").keyup(function() {
-        set_stat("con_stat");
-      });
-
-      $("#con_stat").mouseup(function() {
-        $(this).select();
-        set_stat("con_stat");
-      });
-
-      $("#dfs_stat").keyup(function() {
-        set_stat("dfs_stat");
-      });
-
-      $("#dfs_stat").mouseup(function() {
-        $(this).select();
-        set_stat("dfs_stat");
-      });
-
-      $("#ski_stat").keyup(function() {
-        set_stat("ski_stat");
-      });
-
-      $("#ski_stat").mouseup(function() {
-        $(this).select();
-        set_stat("ski_stat");
-      });
-
-      $("#int_stat").keyup(function() {
-        set_stat("int_stat");
-      });
-
-      $("#int_stat").mouseup(function() {
-        $(this).select();
-        set_stat("int_stat");
-      });
-
-      $("#spd_stat").keyup(function() {
-        set_stat("spd_stat");
-      });
-
-      $("#spd_stat").mouseup(function() {
-        $(this).select();
-        set_stat("spd_stat");
-      });
-
-      $("#limit_dmg").blur(function() {
-        blur_click_event("limit_dmg");
-      });
-
-      $("#limit_dmg").click(function() {
-        blur_click_event("limit_dmg");
-        $(this).select();
-      });
-
-      $("#limit_dfs").blur(function() {
-        blur_click_event("limit_dfs");
-      });
-
-      $("#limit_dfs").click(function() {
-        blur_click_event("limit_dfs");
-        $(this).select();
-      });
-
-      $("#limit_con").blur(function() {
-        blur_click_event("limit_con");
-      });
-
-      $("#limit_con").click(function() {
-        blur_click_event("limit_con");
-        $(this).select();
-      });
-
-      $("#dmg_item_up").blur(function() {
-        blur_click_event("dmg_item_up");
-      });
-
-      $("#dmg_item_up").click(function() {
-        blur_click_event("dmg_item_up");
-        $(this).select();
-      });
-
-      $("#cri_item_up").blur(function() {
-        blur_click_event("cri_item_up");
-      });
-
-      $("#cri_item_up").click(function() {
-        blur_click_event("cri_item_up");
-        $(this).select();
-      });
-
-      level_up_stat();
-      my.getspecinfo();
+      $("#stat").keydown(function(e) {if(e.keyCode == 13) {getIvDmg();}});
+      $("#rimitDmg").keydown(function(e) {if(e.keyCode == 13) {getIvDmg();}});
+      $("#itemUpDmg").keydown(function(e) {if(e.keyCode == 13) {getIvDmg();}});
+      $("#stat").click(function(e) {$(this).select();});
+      $("#rimitDmg").click(function(e) {$(this).select();});
+      $("#itemUpDmg").click(function(e) {$(this).select();});
     });
 
-    function level_up_stat() {
-      var level = Number($("#level").val());
-      if(level > 255) level = 255;
-      var total_stat = 0;
-      var bonus_stat = 1;
-
-      for(var i=0; i<level; i++) {
-        if(i>=30 && (i%10==0)) {
-          total_stat += (5+bonus_stat);
-          bonus_stat += 1;
-        }else{
-          total_stat += 5;
-        }
-      }
-
-      $("#levelstat_hid").val(total_stat);
-      var levelstat_hid = Number($("#levelstat_hid").val());
-      var restat_stat = Number($("#restat_hid").val());
-      var point_hid = Number($("#point_hid").val());
-      var use_stat = get_use_stat();
-
-      $("#point_hid").val(String(restat_stat + levelstat_hid));
-      if(point_hid < use_stat) {
-        $("#point_stat").val(String(restat_stat + levelstat_hid));
-        $("#life_stat").val("5");
-        $("#con_stat").val("5");
-        $("#dfs_stat").val("5");
-        $("#ski_stat").val("5");
-        $("#int_stat").val("5");
-        $("#spd_stat").val("5");
-      }else{
-        $("#point_stat").val(String(restat_stat + levelstat_hid - use_stat));
-      }
-
+    function wp_change() {
+      // if(confirm("무기를 바꾸나요?")) {
+        document.location.href = "/wp";
+      // }
     }
 
-    function get_use_stat() {
-      var init_stat_tot = 30;
-      var life_stat = Number($("#life_stat").val());
-      var con_stat = Number($("#con_stat").val());
-      var dfs_stat = Number($("#dfs_stat").val());
-      var ski_stat = Number($("#ski_stat").val());
-      var int_stat = Number($("#int_stat").val());
-      var spd_stat = Number($("#spd_stat").val());
-      var total_set_stat = life_stat+con_stat+dfs_stat+ski_stat+int_stat+spd_stat-init_stat_tot;
-
-      return total_set_stat;
-    }
-
-    function set_stat(stat_dv) {
-      var init_stat = 5;
-      var cur_stat = Number($("#"+stat_dv).val());
-      var total_set_stat = get_use_stat();
-      var point_hid = Number($("#point_hid").val());
-
-      if(cur_stat >= init_stat) {
-        if(total_set_stat > point_hid) {
-          //최대치셋팅
-          var cur_stat = Number($("#"+stat_dv).val());
-          var max_stat = cur_stat-(total_set_stat-point_hid);
-          var limit_stat = get_limit_stat();
-          if(max_stat > limit_stat) $("#"+stat_dv).val(limit_stat);
-          else $("#"+stat_dv).val(max_stat);
-          $("#point_stat").val("0");
-        }else{
-          $("#point_stat").val(point_hid-total_set_stat);
-        }
-      }
-    }
-
-    function blur_click_event(name) {
-      if(name=="level") {
-        if(Number($("#level").val()) < 1) $("#"+name).val("1");
-        if(Number($("#level").val()) > 254) $("#"+name).val("255");
-
-        var levelstat_hid = Number($("#levelstat_hid").val());
-        var restat_stat = Number($("#restat_hid").val());
-        var point_hid = Number($("#point_hid").val());
-        var use_stat = get_use_stat();
-
-        if(point_hid < use_stat) {
-          $("#point_stat").val(String(restat_stat + levelstat_hid));
-          $("#life_stat").val("5");
-          $("#con_stat").val("5");
-          $("#dfs_stat").val("5");
-          $("#ski_stat").val("5");
-          $("#int_stat").val("5");
-          $("#spd_stat").val("5");
-        }
-      }else if(name.indexOf("limit") > -1 || name=="dmg_item_up") {
-        if(Number($("#"+name).val()) < 0) $("#"+name).val("0");
-        if(Number($("#"+name).val()) > 100) $("#"+name).val(100);
-      }else if(name=="cri_item_up") {
-        if(Number($("#"+name).val()) < 0) $("#"+name).val("0");
-        if(Number($("#"+name).val()) > 50) $("#"+name).val(50);
-      }else{
-        var total_limit_stat = get_limit_stat();
-        if(Number($("#"+name).val()) < 5) $("#"+name).val("5");
-        if(Number($("#"+name).val()) > total_limit_stat) $("#"+name).val(total_limit_stat);
-      }
-
-      set_stat(name);
-      my.getspecinfo();
-    }
-
-    function get_limit_stat() {
-      var total_limit_stat = 0;
-      var limit_restat = 0;
-      var limit_stat = 0;
-      var level = Number($("#level").val());
-      var rebirth = Number($("#restat").val());
-      if(level < 101) limit_stat = 350;
-      else if(level >= 101 && level < 105) limit_stat = 400;
-      else if(level >= 105 && level < 110) limit_stat = 415;
-      else if(level >= 110 && level < 115) limit_stat = 430;
-      else if(level >= 115) limit_stat = 450;
-
-      limit_restat = rebirth * 10;
-
-      return limit_restat + limit_stat;
-    }
-
-    function stat_up_disp(dv) {
-      if(dv == "1") {
-        $("#statup1_dv").text("일반");
-      }else if(dv == "2") {
-        $("#statup1_dv").text("변이");
-      }
-
-      my.getspecinfo();
-    }
-
-    function stat_up_disp1(dv) {
-      if(dv == "1") {
-        $("#statup2_dv").text("없음");
-      }else if(dv == "2") {
-        $("#statup2_dv").text("공앰");
-      }else if(dv == "3") {
-        $("#statup2_dv").text("고급공앰");
-      }
-
-      my.getspecinfo();
+    function getIvDmg() {
+      /*
+      * wpDmg:무기데미지,
+      * stat:스탯(체력or기술),
+      * itemUpDmg:템공상합,
+      * rimitDmg:해방공,
+      * bYn:변이여부 (1=변이,3=노변이)
+      * dpDv:공앰여부 (1=노공앰,2=일반공앰,3=고급공앰)
+      */
+      var wpDmg = Number($("#curr_wp_dmg").text());
+      var stat = Number($("#stat").val());
+      var rimitDmg = Number($("#rimitDmg").val());
+      var itemUpDmg = Number($("#itemUpDmg").val());
+      var bYn = Number($("#bYn").val());
+      var dpDv = Number($("#dpDv").val());
+      // console.log(
+      // "무뎀:"+wpDmg + " | " +
+      // "스탯:"+stat + " | " +
+      // "해방:"+rimitDmg + " | " +
+      // "템공:"+itemUpDmg + " | " +
+      // "변이:"+bYn + " | " +
+      // "공앰:"+dpDv);
+      var inv_dmg = utils.getIvDmg(wpDmg,stat,itemUpDmg,rimitDmg,bYn,dpDv);
+      $("#curr_inv_dmg").text(utils.formatComma(String(inv_dmg)));
+      $("#curr_inv_dmg1").text(utils.formatComma(String(inv_dmg)));
     }
   </script>
 </body>

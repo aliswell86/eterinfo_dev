@@ -29,11 +29,14 @@ app.use(bodyParser.urlencoded({extended:true})); // 3
 // });
 
 //Routes
-app.use("/", require("./routes/wp"));
+app.use("/", require("./routes/main"));
+// app.use("/", require("./routes/wp"));
+app.use("/main", require("./routes/main"));
 app.use("/wp", require("./routes/wp"));
 app.use("/custom", require("./routes/custom"));
 app.use("/notice", require("./routes/notice"));
 app.use("/boxsim", require("./routes/boxsim"));
+app.use("/dmgsim", require("./routes/dmgsim"));
 
 app.listen(8001, function() {
   console.log("server on:"+__dirname);

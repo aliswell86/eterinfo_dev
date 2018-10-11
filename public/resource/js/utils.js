@@ -19,3 +19,27 @@ utils.formatComma = function(str) {
   }
   return x1 + x2;
 };
+
+utils.createHiddenField = function(formNm, fieldId, value) {
+  var formObj = document.forms[formNm];
+  var fieldObj = document.createElement("input");
+  fieldObj.type = "text";
+  fieldObj.id = fieldId;
+  fieldObj.value = value;
+  formObj.appendChild(fieldObj);
+};
+
+/*
+* wpDmg:무기데미지,
+* stat:스탯(체력or기술),
+* itemUpDmg:템공상합,
+* rimitDmg:해방공,
+* bYn:변이여부 (1=변이,3=노변이)
+* dpDv:공앰여부 (1=노공앰,2=일반공앰,3=고급공앰)
+*/
+utils.getIvDmg = function(wpDmg,stat,itemUpDmg,rimitDmg,bYn,dpDv) {
+  var default_inven_dmg = Math.floor(Number(wpDmg)+Number(wpDmg)*(Number(stat)/100)+Number(stat));
+  var item_inven_dmg = (default_inven_dmg/100)*Number(itemUpDmg);
+  inven_dmg = Math.floor((default_inven_dmg + item_inven_dmg)*(1+(Number(rimitDmg)/100))*(1+Number(bYn)/10)*(1+Number(dpDv)/10));
+  return inven_dmg;
+};
