@@ -2,7 +2,7 @@
 var express = require("express");
 var utils  = require("../utils");
 var router = express.Router();
-var header_txt = "이터인포 - 이터널시티 - 알쏭달쏭 폭죽패키지";
+var header_txt = "알쏭달쏭 폭죽패키지 - 이터널시티 - 이터인포";
 var header_description = "한국형 좀비 아포칼립스 RPG! 이터널시티의 알쏭달쏭 폭죽패키지를 열어 봅니다. 구성품의 확률과 결과물을 확인합니다.";
 
 router.get("/", function(req, res) {

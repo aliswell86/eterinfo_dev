@@ -2,7 +2,7 @@
 var express = require("express");
 var router = express.Router();
 var utils  = require("../utils");
-var header_txt = "이터인포 - 이터널시티 - 용병계산기";
+var header_txt = "용병계산기 - 이터널시티 - 이터인포";
 var header_description = "이터인포 - 한국형 좀비 아포칼립스 RPG! 이터널시티의 용병 강화에 따른 공격력을 계산합니다.";
 
 router.get("/", function(req, res) {
