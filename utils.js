@@ -6,6 +6,28 @@ utils.replace = function(str,findstr,replacestr) {
   return str.replace(new RegExp(findstr,"g"),replacestr);
 };
 
+utils.calcYb = function(dmg1,dmg2,con) {
+  var up_rate_dmg = [100,101,103,106,110,116,123,131,142,155,156,158,159,164,169,174,185,196,207,228];
+  var up_rate_con = [100,100,100,100,100,100,100,100,100,100,115,115,115,123,123,123,134,134,134,151];
+  var dmg1_info_ary = [];
+  var dmg2_info_ary = [];
+  var con_info_ary = [];
+  var result_obj = {};
+
+  for(var i=0; i<20; i++) {
+    dmg1_info_ary.push(Math.floor(dmg1*(up_rate_dmg[i]/100)));
+    dmg2_info_ary.push(Math.floor(dmg2*(up_rate_dmg[i]/100)));
+    con_info_ary.push(Math.floor(con*(up_rate_con[i]/100)));
+  }
+
+  result_obj.dmg1_info_ary = dmg1_info_ary;
+  result_obj.dmg2_info_ary = dmg2_info_ary;
+  result_obj.con_info_ary = con_info_ary;
+  result_obj.upnm_list = ["노강","1강","2강","3강","4강","5강","6강","7강","8강","9강","맥강","맥1강","맥2강","맥3강","맥4강","맥5강","맥6강","맥7강","맥8강","맥9강"];
+
+  return result_obj;
+};
+
 utils.calcWp = function(item_val) {
   var up_classes = [1, 1.1, 1.3, 1.5, 2, 3, 4];
   var up_rate = [0,1,2,3,4,5,6,7,8,9,1,1,1,3,3,3,6,6,6,10];

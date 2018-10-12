@@ -37,6 +37,7 @@ app.use("/custom", require("./routes/custom"));
 app.use("/notice", require("./routes/notice"));
 app.use("/boxsim", require("./routes/boxsim"));
 app.use("/dmgsim", require("./routes/dmgsim"));
+app.use("/ybsim", require("./routes/ybsim"));
 
 app.listen(8001, function() {
   console.log("server on:"+__dirname);

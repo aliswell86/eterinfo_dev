@@ -167,3 +167,54 @@ boxsim = function() {
     }
   };
 }();
+
+ybsim = function() {
+  var callback_getYbInfo = function(data,textStatus,xhr) {
+    if(!myajax.ajaxStatus(xhr,textStatus)) return;
+
+    $("#ybtab tbody tr").remove();
+    var html = "";
+
+    for(var i=0; i<5; i++) {
+      html += "<tr>";
+      html += "<td>"+data.upnm_list[(i*4)+0]+"</td>";
+      html += "<td>"+data.upnm_list[(i*4)+1]+"</td>";
+      html += "<td>"+data.upnm_list[(i*4)+2]+"</td>";
+      html += "<td>"+data.upnm_list[(i*4)+3]+"</td>";
+      html += "</tr><tr>";
+      html += "<td><span class=\"dmg bold\">";
+      html += "사공:"+utils.formatComma(String(data.dmg1_info_ary[(i*4)+0]))+"<br/>";
+      html += "타공:"+utils.formatComma(String(data.dmg2_info_ary[(i*4)+0]))+"<br/>";
+      html += "체력:"+utils.formatComma(String(data.con_info_ary[(i*4)+0]));
+      html += "</span></td>";
+      html += "<td><span class=\"dmg bold\">";
+      html += "사공:"+utils.formatComma(String(data.dmg1_info_ary[(i*4)+1]))+"<br/>";
+      html += "타공:"+utils.formatComma(String(data.dmg2_info_ary[(i*4)+1]))+"<br/>";
+      html += "체력:"+utils.formatComma(String(data.con_info_ary[(i*4)+1]));
+      html += "</span></td>";
+      html += "<td><span class=\"dmg bold\">";
+      html += "사공:"+utils.formatComma(String(data.dmg1_info_ary[(i*4)+2]))+"<br/>";
+      html += "타공:"+utils.formatComma(String(data.dmg2_info_ary[(i*4)+2]))+"<br/>";
+      html += "체력:"+utils.formatComma(String(data.con_info_ary[(i*4)+2]));
+      html += "</span></td>";
+      html += "<td><span class=\"dmg bold\">";
+      html += "사공:"+utils.formatComma(String(data.dmg1_info_ary[(i*4)+3]))+"<br/>";
+      html += "타공:"+utils.formatComma(String(data.dmg2_info_ary[(i*4)+3]))+"<br/>";
+      html += "체력:"+utils.formatComma(String(data.con_info_ary[(i*4)+3]));
+      html += "</span></td>";
+      html += "</tr>";
+    }
+
+    $("#ybtab tbody").html(html);
+  };
+  return {
+    getYbInfo : function() {
+      var url = "/ybsim/getybinfo";
+      var data = {};
+      data.ybdmga = $("#ybDmgA").val();
+      data.ybdmgb = $("#ybDmgB").val();
+      data.ybcon = $("#ybCon").val();
+      myajax.ajaxSubmit(url,data,callback_getYbInfo);
+    }
+  };
+}();
