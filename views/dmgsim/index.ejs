@@ -1,22 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <% include ../partials/head %>
 </head>
 <body>
-  <div id="wrapper">
-    <% include ../partials/nav %>
-    <div id="page-wrapper">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-12">
-            <h1 class="page-header">dmgsim</h1>
-          </div>
-        </div>
-      </div>
-    </div>
+  <% include ../partials/nav %>
+  <!-- Page Content -->
+  <div class="container">
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3"><a href="/wp">아이템정보</a>
+      <small><a href="/wp">무기</a></small>
+    </h1>
+
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="/">Home</a>
+      </li>
+      <li class="breadcrumb-item active"><a href="/wp">무기</a></li>
+    </ol>
   </div>
   <% include ../partials/footer %>
   <% include ../partials/script %>
+  <script>
+    jQuery(document).ready(function() {
+    });
+  </script>
 </body>
 </html>

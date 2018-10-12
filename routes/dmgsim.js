@@ -1,8 +1,8 @@
 
 var express = require("express");
 var router = express.Router();
-var header_txt = "이터인포 - 공지사항";
-var header_description = "이터인포 - 이터인포 방문을 환영합니다. 공지 내용및 업데이트 내역을 확인하는 화면입니다.";
+var header_txt = "이터인포 - 이터널시티 - 데미지시뮬레이션";
+var header_description = "이터인포 - 한국형 좀비 아포칼립스 RPG! 이터널시티의 인벤 공격력에 따른 몬스터를 타격을했을때의 데미지를 예상해봅니다.";
 
 router.get("/", function(req, res) {
   res.render("dmgsim/index",{title:header_txt,description:header_description});
