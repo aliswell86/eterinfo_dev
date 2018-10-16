@@ -43,3 +43,7 @@ utils.getIvDmg = function(wpDmg,stat,itemUpDmg,rimitDmg,bYn,dpDv) {
   inven_dmg = Math.floor((default_inven_dmg + item_inven_dmg)*(1+(Number(rimitDmg)/100))*(1+Number(bYn)/10)*(1+Number(dpDv)/10));
   return inven_dmg;
 };
+
+utils.isMobile = function() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+};
