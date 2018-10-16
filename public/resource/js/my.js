@@ -92,7 +92,7 @@ boxsim = function() {
     $(".EP100000").html(EP100000 +"<br/>("+(EP100000/(i+1)*100).toFixed(2) +"%)");
 
     var offset = $(".EP500").offset();
-    $('html, body').animate({scrollTop : offset.top+0}, 0);
+    // $('html, body').animate({scrollTop : offset.top+0}, 0);
   };
 
   var callback_box1_open = function(data,textStatus,xhr) {
