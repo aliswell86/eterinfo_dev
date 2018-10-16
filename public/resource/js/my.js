@@ -15,10 +15,10 @@ wp = function() {
         }
         html += "<div class='col-lg-2 col-md-4 col-sm-6 portfolio-item'>";
         html += "<div class='card h-100'>";
-        html += "<a href='/wp/"+obj._id+"'><img class='card-img-top' src='"+obj.img_src+"' alt=''></a>";
+        if(!utils.isMobile()) html += "<a href='/wp/"+obj._id+"'><img class='card-img-top' src='"+obj.img_src+"' alt=''></a>";
         html += "<div class='card-body'>";
         html += "<h5 class='card-title'>";
-        html += "<a href='/wp/"+obj._id+"'>"+obj.item_nm+"</a>";
+        if(utils.isMobile()) html += "<a href='/wp/"+obj._id+"'><img src=\""+obj.img_src+"\" style=\"width:50px;height:50px;\" alt=\""+obj.item_nm+"\" />"+obj.item_nm+"</a>";
         html += "</h5>";
         html += "<p class='card-text'>";
         html += "<div class=''>종류:"+obj.item_dtl_dv+"</div>";
