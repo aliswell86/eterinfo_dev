@@ -93,6 +93,7 @@ boxsim = function() {
 
     var offset = $(".EP500").offset();
     // $('html, body').animate({scrollTop : offset.top+0}, 0);
+    $(".EP500").focus();
   };
 
   var callback_box1_open = function(data,textStatus,xhr) {
