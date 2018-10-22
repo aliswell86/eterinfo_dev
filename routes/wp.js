@@ -33,8 +33,6 @@ router.get("/:nameParam", function(req, res) {
   var result_obj = {};
   var up_list = [];
 
-  utils.popul_item_save(id,"detail");
-
   EterItem.findOne({_id:id}).exec(
     function(err, db_obj) {
       if(err) return res.json(err);

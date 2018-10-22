@@ -30,7 +30,9 @@ wp = function() {
         html += "<div class=''>등급:"+obj.tier+"</div>";
         html += "<div class=''>크기:"+obj.size+"</div>";
         html += "<div style='margin-bottom:14px;'></div>";
-        html += "<a class=\"btn btn-secondary\" href=\"/custom/"+obj._id+"\" type=\"button\">커스텀무기선택</a>";
+        html += "<a class=\"btn btn-secondary\" href=\"/custom/"+obj._id+"\" type=\"button\">인벤공격력계산</a>";
+        html += "<div style='margin-bottom:2px;'></div>";
+        html += "<a class=\"btn btn-secondary\" href=\"/custom/cri/"+obj._id+"\" type=\"button\">인벤치명계산</a>";
         html += "<div style='margin-bottom:2px;'></div>";
         html += "<a class=\"btn btn-secondary\" href=\"/wp/"+obj._id+"\" type=\"button\">강화별상세보기</a>";
         html += "</p>";

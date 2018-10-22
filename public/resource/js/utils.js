@@ -44,6 +44,17 @@ utils.getIvDmg = function(wpDmg,stat,itemUpDmg,rimitDmg,bYn,dpDv) {
   return inven_dmg;
 };
 
+utils.getIvCri = function(wpCri,stat,itemUpCri) {
+  var resultObj = {};
+  var inven_cri = Math.floor(((wpCri/5) * ((stat/100)+1)) + itemUpCri + 1);
+  if(inven_cri > 50) inven_cri = 50;
+  var head_atk_rt = (3+(stat/50)).toFixed(2);
+
+  resultObj.inven_cri = inven_cri;
+  resultObj.head_atk_rt = head_atk_rt;
+  return resultObj;
+};
+
 utils.isMobile = function() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 };
