@@ -11,6 +11,11 @@ wp = function() {
       html += "<div class='item_db_list'>";
       $.each(data, function(i, obj) {
         if(i=='0' || i%6=='0'){
+          if(utils.isMobile()) {
+            html += "<div style=\"padding:4px;\"><!-- 300*50 --><ins class=\"adsbygoogle\"     style=\"display:inline-block;width:300px;height:50px\"     data-ad-client=\"ca-pub-1407998984163880\"     data-ad-slot=\"6698737810\"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script><div>";
+          }else{
+            html += "<div style=\"padding:4px;\"><!-- 광고1 --><ins class=\"adsbygoogle\"     style=\"display:block\"     data-ad-client=\"ca-pub-1407998984163880\"     data-ad-slot=\"4971623568\"     data-ad-format=\"auto\"     data-full-width-responsive=\"true\"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>";
+          }
           html += "<div class='row'>";
         }
         html += "<div class='col-lg-2 col-md-4 col-sm-6 portfolio-item'>";
