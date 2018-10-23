@@ -58,3 +58,11 @@ utils.getIvCri = function(wpCri,stat,itemUpCri) {
 utils.isMobile = function() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 };
+
+utils.setAdSense = function() {
+  if(utils.isMobile()) {
+    $(".adsense").html("<div style=\"padding:4px;text-align:center;vertical-align:middle;\"><ins class=\"adsbygoogle\"     style=\"display:inline-block;width:300px;height:50px\"     data-ad-client=\"ca-pub-1407998984163880\"     data-ad-slot=\"6698737810\"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script><div>");
+  }else{
+    $(".adsense").html("<div style=\"padding:4px;text-align:center;vertical-align:middle;\"><ins class=\"adsbygoogle\"     style=\"display:block\"     data-ad-client=\"ca-pub-1407998984163880\"     data-ad-slot=\"4971623568\"     data-ad-format=\"auto\"     data-full-width-responsive=\"true\"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>");
+  }
+};
