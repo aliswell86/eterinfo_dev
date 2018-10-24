@@ -9,6 +9,7 @@ wp = function() {
     var view_data = [];
     var row_cnt_sum = 0;
     var row_cnt_sum2 = 0;
+    var row_cnt_sum3 = 0;
     var kk = 0;
 
     if(row_cnt > 0) {
@@ -18,8 +19,10 @@ wp = function() {
       for(var jj=0; jj<row_cnt+row_cnt_sum; jj++) {
         if(jj%4=='0') row_cnt_sum2++;
       }
-      console.log("row_cnt+row_cnt_sum2 : " + row_cnt+row_cnt_sum2);
-      for(var k=0; k<row_cnt+row_cnt_sum2; k++) {
+      for(var jjj=0; jjj<row_cnt+row_cnt_sum2; jjj++) {
+        if(jjj%4=='0') row_cnt_sum3++;
+      }
+      for(var k=0; k<row_cnt+row_cnt_sum3; k++) {
         if(k%4=='0') {
           view_data.push({});
         }else{
@@ -29,7 +32,7 @@ wp = function() {
       }
 
       html += "<div class='item_db_list'>";
-      console.log("view_data : " + view_data.length);
+      // console.log("view_data : " + view_data.length);
       $.each(view_data, function(i, obj) {
         if(i=='0' || i%6=='0'){
           html += "<div class='row'>";
@@ -38,7 +41,8 @@ wp = function() {
         if(i%4=='0') {
           html += "<div class='col-lg-2 col-md-4 col-sm-6 portfolio-item'>";
           html += "<div class=\"card h-100\" style=\"border:0\">";
-          html += "<p><div style=\"padding:4px;text-align:center;vertical-align:middle;\"><ins class=\"adsbygoogle\"     style=\"display:block\"     data-ad-client=\"ca-pub-1407998984163880\"     data-ad-slot=\"4971623568\"     data-ad-format=\"auto\"     data-full-width-responsive=\"true\"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></p>";
+          if(!utils.isMobile()) html += "<p><div style=\"padding:4px;text-align:center;vertical-align:middle;\"><ins class=\"adsbygoogle\"     style=\"display:block\"     data-ad-client=\"ca-pub-1407998984163880\"     data-ad-slot=\"4971623568\"     data-ad-format=\"auto\"     data-full-width-responsive=\"true\"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></p>";
+          if(utils.isMobile()) html += "<p><div style=\"padding:4px;text-align:center;vertical-align:middle;\">  <ins class=\"adsbygoogle\"       style=\"display:inline-block;width:300px;height:250px\"       data-ad-client=\"ca-pub-1407998984163880\"       data-ad-slot=\"5633068152\"></ins>  <script>  (adsbygoogle = window.adsbygoogle || []).push({});  </script></div></p>";
           html += "</div></div>";
         }else{
           html += "<div class='col-lg-2 col-md-4 col-sm-6 portfolio-item'>";
