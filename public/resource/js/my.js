@@ -4,27 +4,43 @@ wp = function() {
     if(!myajax.ajaxStatus(xhr,textStatus)) return;
 
     $(".item_db_body .item_db_list").remove();
-    var row_cnt = data.length;
+    var row_cnt = Number(data.length);
     var html = "";
+    var view_data = [];
+    var row_cnt_sum = 0;
+    var row_cnt_sum2 = 0;
+    var kk = 0;
 
     if(row_cnt > 0) {
+      for(var j=0; j<row_cnt; j++) {
+        if(j%4=='0') row_cnt_sum++;
+      }
+      for(var jj=0; jj<row_cnt+row_cnt_sum; jj++) {
+        if(jj%4=='0') row_cnt_sum2++;
+      }
+      console.log("row_cnt+row_cnt_sum2 : " + row_cnt+row_cnt_sum2);
+      for(var k=0; k<row_cnt+row_cnt_sum2; k++) {
+        if(k%4=='0') {
+          view_data.push({});
+        }else{
+          view_data.push(data[kk]);
+          kk++;
+        }
+      }
+
       html += "<div class='item_db_list'>";
-      $.each(data, function(i, obj) {
+      console.log("view_data : " + view_data.length);
+      $.each(view_data, function(i, obj) {
         if(i=='0' || i%6=='0'){
-          if(utils.isMobile()) {
-            html += "<div style=\"padding:4px;text-align:center;vertical-align:middle;\">    <ins class=\"adsbygoogle\"       style=\"display:inline-block;width:300px;height:250px\"       data-ad-client=\"ca-pub-1407998984163880\"       data-ad-slot=\"5633068152\"></ins>  <script>  (adsbygoogle = window.adsbygoogle || []).push({});  </script></div>";
-          }else{
-            html += "<div style=\"padding:4px;text-align:center;vertical-align:middle;\"><ins class=\"adsbygoogle\"     style=\"display:block\"     data-ad-client=\"ca-pub-1407998984163880\"     data-ad-slot=\"4971623568\"     data-ad-format=\"auto\"     data-full-width-responsive=\"true\"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>";
-          }
           html += "<div class='row'>";
         }
 
-        // if(i%4=='0') {
-        //   html += "<div class=\"col-lg-4 mb-4\">";
-        //   html += "<div class=\"card h-100\" style=\"border:0\">";
-        //   html += "<p><div style=\"padding:4px;text-align:center;vertical-align:middle;\"><ins class=\"adsbygoogle\"     style=\"display:block\"     data-ad-client=\"ca-pub-1407998984163880\"     data-ad-slot=\"4971623568\"     data-ad-format=\"auto\"     data-full-width-responsive=\"true\"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></p>";
-        //   html += "</div></div>";
-        // }else{
+        if(i%4=='0') {
+          html += "<div class='col-lg-2 col-md-4 col-sm-6 portfolio-item'>";
+          html += "<div class=\"card h-100\" style=\"border:0\">";
+          html += "<p><div style=\"padding:4px;text-align:center;vertical-align:middle;\"><ins class=\"adsbygoogle\"     style=\"display:block\"     data-ad-client=\"ca-pub-1407998984163880\"     data-ad-slot=\"4971623568\"     data-ad-format=\"auto\"     data-full-width-responsive=\"true\"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></p>";
+          html += "</div></div>";
+        }else{
           html += "<div class='col-lg-2 col-md-4 col-sm-6 portfolio-item'>";
           html += "<div class='card h-100'>";
           if(!utils.isMobile()) {
@@ -58,9 +74,9 @@ wp = function() {
           html += "</div>";
           html += "</div>";
           html += "</div>";
-        // }
+        }
 
-        if(i==data.length-1||(String(i)!='0' && ((i+1)%6)=='0')) {
+        if(i==view_data.length-1||(String(i)!='0' && ((i+1)%6)=='0')) {
           html += "</div>";
         }
       });
