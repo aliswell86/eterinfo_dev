@@ -18,32 +18,48 @@ wp = function() {
           }
           html += "<div class='row'>";
         }
-        html += "<div class='col-lg-2 col-md-4 col-sm-6 portfolio-item'>";
-        html += "<div class='card h-100'>";
-        if(!utils.isMobile()) html += "<a href='/wp/"+obj._id+"'><img class='card-img-top' src='"+obj.img_src+"' alt=''></a>";
-        html += "<div class='card-body'>";
-        html += "<h5 class='card-title'>";
-        if(utils.isMobile()) html += "<a href='/wp/"+obj._id+"'><img src=\""+obj.img_src+"\" style=\"width:50px;height:50px;\" alt=\""+obj.item_nm+"\" />"+obj.item_nm+"</a>";
-        html += "</h5>";
-        html += "<p class='card-text'>";
-        html += "<div class=''>종류:"+obj.item_dtl_dv+"</div>";
-        html += "<div class='dmg'>파괴력:"+obj.dmg+"</div>";
-        html += "<div class='cri'>치명타:"+obj.cri+"</div>";
-        html += "<div class='accuracy'>명중률:"+String(Math.floor(Number(obj.accuracy_rate)*100))+"%</div>";
-        html += "<div class='point'>탄착률:"+String(Math.floor(Number(obj.point_rate)*100))+"%</div>";
-        html += "<div class='speed'>속도:"+obj.speed+"회/1분</div>";
-        html += "<div class=''>등급:"+obj.tier+"</div>";
-        html += "<div class=''>크기:"+obj.size+"</div>";
-        html += "<div style='margin-bottom:14px;'></div>";
-        html += "<a class=\"btn btn-secondary\" href=\"/custom/"+obj._id+"\" type=\"button\">인벤공격력계산</a>";
-        html += "<div style='margin-bottom:2px;'></div>";
-        html += "<a class=\"btn btn-secondary\" href=\"/custom/cri/"+obj._id+"\" type=\"button\">인벤치명계산</a>";
-        html += "<div style='margin-bottom:2px;'></div>";
-        html += "<a class=\"btn btn-secondary\" href=\"/wp/"+obj._id+"\" type=\"button\">강화별상세보기</a>";
-        html += "</p>";
-        html += "</div>";
-        html += "</div>";
-        html += "</div>";
+
+        // if(i%4=='0') {
+        //   html += "<div class=\"col-lg-4 mb-4\">";
+        //   html += "<div class=\"card h-100\" style=\"border:0\">";
+        //   html += "<p><div style=\"padding:4px;text-align:center;vertical-align:middle;\"><ins class=\"adsbygoogle\"     style=\"display:block\"     data-ad-client=\"ca-pub-1407998984163880\"     data-ad-slot=\"4971623568\"     data-ad-format=\"auto\"     data-full-width-responsive=\"true\"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></p>";
+        //   html += "</div></div>";
+        // }else{
+          html += "<div class='col-lg-2 col-md-4 col-sm-6 portfolio-item'>";
+          html += "<div class='card h-100'>";
+          if(!utils.isMobile()) {
+            html += "<a href='/wp/"+obj._id+"'><img class='card-img-top' src='"+obj.img_src+"' alt=''></a>";
+          }
+          html += "<div class='card-body'>";
+          html += "<h5 class='card-title'>";
+          if(!utils.isMobile()) {
+            html += obj.item_nm;
+          }
+          if(utils.isMobile()) {
+            html += "<a href='/wp/"+obj._id+"'><img src=\""+obj.img_src+"\" style=\"width:50px;height:50px;\" alt=\""+obj.item_nm+"\" />"+obj.item_nm+"</a>";
+          }
+          html += "</h5>";
+          html += "<p class='card-text'>";
+          html += "<div class=''>종류:"+obj.item_dtl_dv+"</div>";
+          html += "<div class='dmg'>파괴력:"+obj.dmg+"</div>";
+          html += "<div class='cri'>치명타:"+obj.cri+"</div>";
+          html += "<div class='accuracy'>명중률:"+String(Math.floor(Number(obj.accuracy_rate)*100))+"%</div>";
+          html += "<div class='point'>탄착률:"+String(Math.floor(Number(obj.point_rate)*100))+"%</div>";
+          html += "<div class='speed'>속도:"+obj.speed+"회/1분</div>";
+          html += "<div class=''>등급:"+obj.tier+"</div>";
+          html += "<div class=''>크기:"+obj.size+"</div>";
+          html += "<div style='margin-bottom:14px;'></div>";
+          html += "<a class=\"btn btn-secondary\" href=\"/custom/"+obj._id+"\" type=\"button\">인벤공격력계산</a>";
+          html += "<div style='margin-bottom:2px;'></div>";
+          html += "<a class=\"btn btn-secondary\" href=\"/custom/cri/"+obj._id+"\" type=\"button\">인벤치명계산</a>";
+          html += "<div style='margin-bottom:2px;'></div>";
+          html += "<a class=\"btn btn-secondary\" href=\"/wp/"+obj._id+"\" type=\"button\">강화별상세보기</a>";
+          html += "</p>";
+          html += "</div>";
+          html += "</div>";
+          html += "</div>";
+        // }
+
         if(i==data.length-1||(String(i)!='0' && ((i+1)%6)=='0')) {
           html += "</div>";
         }
