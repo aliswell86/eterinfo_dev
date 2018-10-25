@@ -11,19 +11,20 @@ wp = function() {
     var row_cnt_sum2 = 0;
     var row_cnt_sum3 = 0;
     var kk = 0;
+    var ad_num = 5;
 
     if(row_cnt > 0) {
       for(var j=0; j<row_cnt; j++) {
-        if(j%4=='0') row_cnt_sum++;
+        if(j%ad_num=='0') row_cnt_sum++;
       }
       for(var jj=0; jj<row_cnt+row_cnt_sum; jj++) {
-        if(jj%4=='0') row_cnt_sum2++;
+        if(jj%ad_num=='0') row_cnt_sum2++;
       }
       for(var jjj=0; jjj<row_cnt+row_cnt_sum2; jjj++) {
-        if(jjj%4=='0') row_cnt_sum3++;
+        if(jjj%ad_num=='0') row_cnt_sum3++;
       }
       for(var k=0; k<row_cnt+row_cnt_sum3; k++) {
-        if(k%4=='0') {
+        if(k%ad_num=='0') {
           view_data.push({});
         }else{
           view_data.push(data[kk]);
@@ -38,7 +39,7 @@ wp = function() {
           html += "<div class='row'>";
         }
 
-        if(i%4=='0') {
+        if(i%ad_num=='0') {
           html += "<div class='col-lg-2 col-md-4 col-sm-6 portfolio-item'>";
           html += "<div class=\"card h-100\" style=\"border:0\">";
           if(!utils.isMobile()) html += "<p><div style=\"padding:4px;text-align:center;vertical-align:middle;\"><ins class=\"adsbygoogle\"     style=\"display:block\"     data-ad-client=\"ca-pub-1407998984163880\"     data-ad-slot=\"4971623568\"     data-ad-format=\"auto\"     data-full-width-responsive=\"true\"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></p>";
