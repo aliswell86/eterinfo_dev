@@ -17,7 +17,7 @@ db.on("error", function(err){
 });
 
 app.set("view engine", "ejs");
-app.set("views", "/home/hosting_users/balkwang/apps/balkwang_eterinfo/views");
+// app.set("views", "/home/hosting_users/balkwang/apps/balkwang_eterinfo/views");
 
 app.use(express.static(__dirname+"/public"));
 app.use(mtehodOverride("_method"));
@@ -38,6 +38,8 @@ app.use("/notice", require("./routes/notice"));
 app.use("/boxsim", require("./routes/boxsim"));
 app.use("/dmgsim", require("./routes/dmgsim"));
 app.use("/ybsim", require("./routes/ybsim"));
+app.use("/uptde", require("./routes/uptde"));
+app.use("/wptde", require("./routes/wptde"));
 
 app.listen(8001, function() {
   console.log("server on:"+__dirname);

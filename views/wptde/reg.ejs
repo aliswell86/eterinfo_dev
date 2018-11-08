@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <% include ../partials/head %>
+</head>
+<body>
+  <% include ../partials/nav %>
+  <!-- Page Content -->
+  <div class="container">
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3"><a href="/wptde">무기팝니다</a>
+      <small><a href="/wptde/reg">무기등록</a></small>
+    </h1>
+
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="/">Home</a>
+      </li>
+      <li class="breadcrumb-item active"><a href="/wptde/reg">무기등록</a></li>
+    </ol>
+
+    <div class="row">
+      <div class="col-lg-3 mb-4">
+        <div class="card h-100">
+          <!-- <h4 class="card-header">확률안내</h4> -->
+          <div class="card-body">
+            <!-- <p class="card-text"> -->
+              <form>
+                <div class="form-group">
+                  <table>
+                    <colgroup>
+                      <col style='width:50%'/>
+                      <col style='width:*'/>
+                    </colgroup>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <label class="radio-inline">
+                            <input type="radio" name="clyn" id="clyn1" value="Y" checked>CL무기
+                          </label>
+                        </td>
+                        <td>
+                          <label class="radio-inline">
+                            <input type="radio" name="clyn" id="clyn2" value="N">Non-CL무기
+                          </label>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <label class="radio-inline">
+                            <input type="radio" name="stype1" id="stype11" value="2" checked>근거리
+                          </label>
+                        </td>
+                        <td>
+                          <label class="radio-inline">
+                            <input type="radio" name="stype1" id="stype12" value="1" style="text-align:right;">원거리
+                          </label>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <label class="radio-inline">
+                            <input type="radio" name="illegal" id="illegal1" value="Y" checked>불법무기
+                          </label>
+                        </td>
+                        <td>
+                          <label class="radio-inline">
+                            <input type="radio" name="illegal" id="illegal2" value="N" style="text-align:right;">일반무기
+                          </label>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>등급</td>
+                        <td>
+                          <select class="form-control">
+                             <option value="1">1등급</option>
+                             <option value="2">2등급</option>
+                             <option value="3">3등급</option>
+                             <option value="4">4등급</option>
+                             <option value="5">5등급</option>
+                             <option value="6">6등급</option>
+                             <option value="7">7등급</option>
+                             <option value="8">8등급</option>
+                             <option value="9">9등급</option>
+                             <option value="10">10등급</option>
+                             <option value="11">11등급</option>
+                             <option value="12">12등급</option>
+                           </select>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </form>
+            <!-- </p> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% include ../partials/footer %>
+  <% include ../partials/script %>
+  <script>
+    jQuery(document).ready(function() {
+      $("input[name=illegal]").click(function() {
+        alert("dd");
+      });
+      // search_item();
+    });
+  </script>
+</body>
+</html>
