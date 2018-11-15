@@ -40,6 +40,7 @@ app.use("/dmgsim", require("./routes/dmgsim"));
 app.use("/ybsim", require("./routes/ybsim"));
 app.use("/uptde", require("./routes/uptde"));
 app.use("/wptde", require("./routes/wptde"));
+app.use("/plusup", require("./routes/plusup"));
 
 app.listen(8001, function() {
   console.log("server on:"+__dirname);
