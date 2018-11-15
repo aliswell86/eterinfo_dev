@@ -279,6 +279,11 @@ table.wpdtltab tr td {
   font-size:20px;
 }
 
+.btn:focus, .btn.focus {
+  outline: 0 !important;
+  box-shadow: 0 0 0 1px !important;
+}
+
 .form-control {border-radius:0rem !important;}
 
 .btn {border-radius:0rem !important;}
@@ -287,8 +292,8 @@ table.wpdtltab tr td {
   background-color:#fff;border-color:#ccc;color:#333;
   transition:background 0.6s;
 }
-.req-btn.grade div button.btn{padding:.67rem 4.52rem !important;color:#d9534f}
-.btn-grade:hover, .btn-grade-on {
+.req-btn.dv div button.btn{padding:.67rem 4.52rem !important;color:#d9534f}
+.btn-dv:hover, .btn-dv-on {
   background-color:#c82333 !important;
   color:#fff !important;
   border-color:#bd2130 !important;

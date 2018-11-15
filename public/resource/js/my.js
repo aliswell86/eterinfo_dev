@@ -262,3 +262,18 @@ ybsim = function() {
     }
   };
 }();
+
+plusup = function() {
+  var callback_getPlusup = function(data,textStatus,xhr) {
+    if(!myajax.ajaxStatus(xhr,textStatus)) return;
+    console.log(data);
+  };
+  return {
+    getPlusup : function(dv) {
+      var url = "/plusup/get";
+      var data = {};
+      data.dv = dv;
+      myajax.ajaxSubmit(url,data,callback_getPlusup);
+    }
+  };
+}();

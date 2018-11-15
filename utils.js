@@ -90,4 +90,54 @@ utils.formatComma = function(str) {
   return x1 + x2;
 };
 
+utils.plusup = function(dv) {
+  var html = "";
+  var base_value1 = 1.11;
+  var base_value2 = 1.66;
+  var base_value3 = 2.50;
+  var value1_ary = [];
+  var value2_ary = [];
+  var value3_ary = [];
+  var result_obj = {};
+  var str_rt = 0.5;
+  for(var i=0; i<11; i++) {
+    var value = str_rt+(i*0.1);
+    value1_ary.push((base_value1 * value));
+    value2_ary.push((base_value2 * value));
+    value3_ary.push((base_value3 * value));
+  }
+  result_obj.value1 = value1_ary;
+  result_obj.value2 = value2_ary;
+  result_obj.value3 = value3_ary;
+
+  var result_list = [];
+  var list = [];
+  var list_sub = [];
+  var calc_value = 0;
+
+  for(var j=0; j<3; j++) {
+    list = [];
+    calc_value = 0;
+    for(var jj=0; jj<11; jj++) {
+      list_sub = [];
+      calc_value = 0;
+      for(jjj=0; jjj<15; jjj++) {
+        if(jjj>=0 && jjj<=4) {
+          calc_value = calc_value + Number(eval("value"+(j+1)+"_ary[jj]"));
+        }else if(jjj>=5 && jjj<=9) {
+          calc_value = calc_value + Number(eval("value"+(j+1)+"_ary[jj]")*2);
+        }else{
+          calc_value = calc_value + Number(eval("value"+(j+1)+"_ary[jj]")*3);
+        }
+
+        list_sub.push((calc_value*dv).toFixed(2));
+      }
+      list.push(list_sub);
+    }
+    result_list.push(list);
+  }
+
+  return result_list;
+};
+
 module.exports = utils;
