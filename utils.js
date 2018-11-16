@@ -102,14 +102,14 @@ utils.plusup = function(dv) {
   var str_rt = 0.5;
   for(var i=0; i<11; i++) {
     var value = str_rt+(i*0.1);
-    value1_ary.push((base_value1 * value));
-    value2_ary.push((base_value2 * value));
-    value3_ary.push((base_value3 * value));
+    value1_ary.push((base_value1 * value).toFixed(2));
+    value2_ary.push((base_value2 * value).toFixed(2));
+    value3_ary.push((base_value3 * value).toFixed(2));
   }
   result_obj.value1 = value1_ary;
   result_obj.value2 = value2_ary;
   result_obj.value3 = value3_ary;
-
+console.log(result_obj);
   var result_list = [];
   var list = [];
   var list_sub = [];
