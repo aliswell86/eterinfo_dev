@@ -92,8 +92,8 @@ utils.formatComma = function(str) {
 
 utils.plusup = function(dv) {
   var html = "";
-  var base_value1 = 1.11;
-  var base_value2 = 1.66;
+  var base_value1 = 1.111111111;
+  var base_value2 = 1.666666666;
   var base_value3 = 2.50;
   var value1_ary = [];
   var value2_ary = [];
@@ -102,9 +102,9 @@ utils.plusup = function(dv) {
   var str_rt = 0.5;
   for(var i=0; i<11; i++) {
     var value = str_rt+(i*0.1);
-    value1_ary.push((base_value1 * value).toFixed(2));
-    value2_ary.push((base_value2 * value).toFixed(2));
-    value3_ary.push((base_value3 * value).toFixed(2));
+    value1_ary.push((base_value1 * value));
+    value2_ary.push((base_value2 * value));
+    value3_ary.push((base_value3 * value));
   }
   result_obj.value1 = value1_ary;
   result_obj.value2 = value2_ary;
