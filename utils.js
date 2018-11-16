@@ -109,7 +109,7 @@ utils.plusup = function(dv) {
   result_obj.value1 = value1_ary;
   result_obj.value2 = value2_ary;
   result_obj.value3 = value3_ary;
-console.log(result_obj);
+  
   var result_list = [];
   var list = [];
   var list_sub = [];
