@@ -266,7 +266,65 @@ ybsim = function() {
 plusup = function() {
   var callback_getPlusup = function(data,textStatus,xhr) {
     if(!myajax.ajaxStatus(xhr,textStatus)) return;
-    console.log(data);
+
+    var html = "";
+    var html1 = "";
+    var html2 = "";
+    $("#plusup_tab tbody").empty();
+    $("#plusup_tab1 tbody").empty();
+    $("#plusup_tab2 tbody").empty();
+
+    $.each(data, function(i, ary1) {
+      if(i===0) {
+        for(var j=0;j<15;j++) {
+          html += "<tr>";
+          html += "<td>+"+Number(j+1)+"</td>";
+          html += "<td>"+ary1[5][j]+"%</td>";
+          html += "<td>"+ary1[6][j]+"%</td>";
+          html += "<td>"+ary1[7][j]+"%</td>";
+          html += "<td>"+ary1[8][j]+"%</td>";
+          html += "<td>"+ary1[9][j]+"%</td>";
+          html += "<td>"+ary1[10][j]+"%</td>";
+          html += "/<tr>";
+        }
+      }
+    });
+
+    $.each(data, function(i, ary1) {
+      if(i===1) {
+        for(var j=0;j<15;j++) {
+          html1 += "<tr>";
+          html1 += "<td>+"+Number(j+1)+"</td>";
+          html1 += "<td>"+ary1[5][j]+"%</td>";
+          html1 += "<td>"+ary1[6][j]+"%</td>";
+          html1 += "<td>"+ary1[7][j]+"%</td>";
+          html1 += "<td>"+ary1[8][j]+"%</td>";
+          html1 += "<td>"+ary1[9][j]+"%</td>";
+          html1 += "<td>"+ary1[10][j]+"%</td>";
+          html1 += "/<tr>";
+        }
+      }
+    });
+
+    $.each(data, function(i, ary1) {
+      if(i===2) {
+        for(var j=0;j<15;j++) {
+          html2 += "<tr>";
+          html2 += "<td>+"+Number(j+1)+"</td>";
+          html2 += "<td>"+ary1[5][j]+"%</td>";
+          html2 += "<td>"+ary1[6][j]+"%</td>";
+          html2 += "<td>"+ary1[7][j]+"%</td>";
+          html2 += "<td>"+ary1[8][j]+"%</td>";
+          html2 += "<td>"+ary1[9][j]+"%</td>";
+          html2 += "<td>"+ary1[10][j]+"%</td>";
+          html2 += "/<tr>";
+        }
+      }
+    });
+
+    $("#plusup_tab tbody").html(html);
+    $("#plusup_tab1 tbody").html(html1);
+    $("#plusup_tab2 tbody").html(html2);
   };
   return {
     getPlusup : function(dv) {

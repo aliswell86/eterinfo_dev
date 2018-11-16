@@ -15,14 +15,9 @@
       <li class="breadcrumb-item">
         <a href="/">Home</a>
       </li>
-      <li class="breadcrumb-item active"><a href="/plusup">의류플러스업</a></li>
+      <li class="breadcrumb-item"><a href="/plusup">의류플러스업</a></li>
+      <li class="breadcrumb-item active"><a href="/plusup">비율정보</a></li>
     </ol>
-
-    <div class="row">
-      <div class="col-lg-12">
-        * 비율정보
-      </div>
-    </div>
 
     <div class="req-btn grade">
       <div class="row">
@@ -36,6 +31,96 @@
       </div>
     </div>
 
+    <div class="row">
+      <div class="col-lg-12">
+        <p>
+          1.장인등급
+          <table class="table" id="plusup_tab">
+            <colgroup>
+              <col style="width:50px;">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>플업</th>
+                <th>6급</th>
+                <th>7급</th>
+                <th>8급</th>
+                <th>9급</th>
+                <th>10급</th>
+                <th>11급</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- <tfoot class="more_view" style="display:none;">
+                <tr>
+                  <td colspan="4" onclick="javascript:card.getMyCardInfo("0");">더보기</td>
+                </tr>
+              </tfoot> -->
+            </tbody>
+          </table>
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <p>
+          2.명인등급
+          <table class="table" id="plusup_tab1">
+            <colgroup>
+              <col style="width:50px;">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>플업</th>
+                <th>6급</th>
+                <th>7급</th>
+                <th>8급</th>
+                <th>9급</th>
+                <th>10급</th>
+                <th>11급</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- <tfoot class="more_view" style="display:none;">
+                <tr>
+                  <td colspan="4" onclick="javascript:card.getMyCardInfo("0");">더보기</td>
+                </tr>
+              </tfoot> -->
+            </tbody>
+          </table>
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <p>
+          3.O.T등급
+          <table class="table" id="plusup_tab2">
+            <colgroup>
+              <col style="width:50px;">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>플업</th>
+                <th>6급</th>
+                <th>7급</th>
+                <th>8급</th>
+                <th>9급</th>
+                <th>10급</th>
+                <th>11급</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- <tfoot class="more_view" style="display:none;">
+                <tr>
+                  <td colspan="4" onclick="javascript:card.getMyCardInfo("0");">더보기</td>
+                </tr>
+              </tfoot> -->
+            </tbody>
+          </table>
+        </p>
+      </div>
+    </div>
 
   </div>
   <% include ../partials/footer %>
@@ -48,7 +133,7 @@
 
         if(button_nm.indexOf("dvoption") > -1) {
           var dvoption_num = button_nm.substring(button_nm.indexOf("dvoption")+("dvoption".length));
-          
+
           //css(click)
           $(this).parents("p").children("button").each(function(idex, item) {
             $(this).attr("class","btn btn-dv dvoption"+$(this).attr("class").substring($(this).attr("class").indexOf("dvoption")+("dvoption".length)));
