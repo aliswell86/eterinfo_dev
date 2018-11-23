@@ -17,7 +17,7 @@ db.on("error", function(err){
 });
 
 app.set("view engine", "ejs");
-app.set("views", "/home/hosting_users/balkwang/apps/balkwang_eterinfo/views");
+// app.set("views", "/home/hosting_users/balkwang/apps/balkwang_eterinfo/views");
 
 app.use(express.static(__dirname+"/public"));
 app.use(mtehodOverride("_method"));
